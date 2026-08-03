@@ -324,16 +324,6 @@ final_segmented AS (
 
 SELECT * INTO #CustomerSegments FROM final_segmented;
 
--- REPORT 1: SUMMARY (DISTRIBUTION CHECK)
-SELECT 
-    final_segmentation,
-    final_segmentation_priority,
-    COUNT(*) AS num_customers,
-    COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS pct
-FROM #CustomerSegments
-GROUP BY final_segmentation, final_segmentation_priority
-ORDER BY final_segmentation_priority;
-
 SELECT
 fs.as_of_date,
 fs.CIF,
