@@ -324,7 +324,8 @@ final_segmented AS (
             ELSE N'Base Customer / Standard Relationship'
         END AS final_segmentation
     FROM segments s
-),
+)
+
 SELECT * INTO #CustomerSegments FROM final_segmented;
 
 -- BÁO CÁO 1: TỔNG HỢP (KIỂM TRA PHÂN BỔ)
