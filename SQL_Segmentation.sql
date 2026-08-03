@@ -137,71 +137,70 @@ calc AS (
 segments AS (
     SELECT c.*,
 
-        /* 1. Value segment */
-        CASE
-            WHEN c.current_deposit_balance > @THR_100B AND c.current_loan_balance > @THR_100B THEN N'Quan hệ kép lớn'
-            WHEN c.current_deposit_balance > @THR_100B THEN N'KH gửi tiền giá trị lớn'
-            WHEN c.current_loan_balance > @THR_100B THEN N'KH vay giá trị lớn'
-            WHEN c.total_relationship_value > @THR_100B THEN N'Quan hệ lớn'
-            WHEN c.total_relationship_value > @THR_10B THEN N'Quan hệ cao'
-            WHEN c.total_relationship_value > @THR_5B THEN N'Quan hệ trung bình'
-            WHEN c.total_relationship_value > @THR_1B THEN N'Quan hệ thấp'
-            WHEN c.total_relationship_value > @THR_100M THEN N'Quan hệ đại trà'
-            ELSE N'Quan hệ rất thấp'
+       CASE
+            WHEN c.current_deposit_balance > @THR_100B AND c.current_loan_balance > @THR_100B THEN N'Large Dual Relationship'
+            WHEN c.current_deposit_balance > @THR_100B THEN N'Large Deposit Customer'
+            WHEN c.current_loan_balance > @THR_100B THEN N'Large Loan Customer'
+            WHEN c.total_relationship_value > @THR_100B THEN N'Large Relationship'
+            WHEN c.total_relationship_value > @THR_10B THEN N'High Relationship'
+            WHEN c.total_relationship_value > @THR_5B THEN N'Medium Relationship'
+            WHEN c.total_relationship_value > @THR_1B THEN N'Low Relationship'
+            WHEN c.total_relationship_value > @THR_100M THEN N'Mass Relationship'
+            ELSE N'Very Low Relationship'
         END AS value_segment,
 
         /* 2. Relationship segment */
         CASE
-            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance = 0 THEN N'Chỉ tiền gửi'
-            WHEN c.current_deposit_balance = 0 AND c.current_loan_balance > 0 THEN N'Chỉ vay'
-            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio <= 0.20 THEN N'Quan hệ cân bằng'
-            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio > 0.20 AND c.deposit_share >= 0.60 AND c.loan_share > 0 THEN N'KH thặng dư thanh khoản'
-            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio > 0.20 AND c.deposit_share > 0 AND c.loan_share >= 0.90 THEN N'KH thiên đòn bẩy'
-            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 THEN N'Quan hệ kép'
-            ELSE N'Chưa có quan hệ tài chính'
+            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance = 0 THEN N'Deposit Only'
+            WHEN c.current_deposit_balance = 0 AND c.current_loan_balance > 0 THEN N'Loan Only'
+            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio <= 0.20 THEN N'Balanced Relationship'
+            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio > 0.20 AND c.deposit_share >= 0.60 AND c.loan_share > 0 THEN N'Liquidity Surplus Customer'
+            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 AND c.balance_ratio > 0.20 AND c.deposit_share > 0 AND c.loan_share >= 0.90 THEN N'Leverage-Oriented Customer'
+            WHEN c.current_deposit_balance > 0 AND c.current_loan_balance > 0 THEN N'Dual Relationship'
+            ELSE N'No Financial Relationship'
         END AS relationship_segment,
 
         /* 3. Product segment */
         CASE
         -- ĐÃ BỎ NHÓM QUAN HỆ SÂU ĐA SẢN PHẨM
-            WHEN c.num_product_group >= 3 AND c.num_products >= 4 THEN N'Quan hệ đa sản phẩm'
-            WHEN c.num_product_group = 1 AND c.num_products <= 2 THEN N'KH một nhóm sản phẩm'
-            WHEN c.num_product_group <= 2 AND c.num_products >= 3 THEN N'KH có sản phẩm nhưng nông nhóm'
-            WHEN c.num_product_group = 0 OR c.num_products = 0 THEN N'KH chưa có sản phẩm'
-            ELSE N'Quan hệ chuẩn'
+            WHEN c.num_product_group >= 3 AND c.num_products >= 4 THEN N'Multi-Product Relationship'
+            WHEN c.num_product_group = 1 AND c.num_products <= 2 THEN N'Single Product Group Customer'
+            WHEN c.num_product_group <= 2 AND c.num_products >= 3 THEN N'Shallow Product Group Customer'
+            WHEN c.num_product_group = 0 OR c.num_products = 0 THEN N'No Product Customer'
+            ELSE N'Standard Relationship'
         END AS product_segment,
 
         /* 4. Life cycle segment */
         CASE
-            WHEN c.num_active_accounts = 0 THEN N'Đã đóng tài khoản'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days <= 90 THEN N'Mới đến ngân hàng'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days BETWEEN 91 AND 365 THEN N'Đang hình thành quan hệ'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND (ISNULL(c.avg_deposit_balance_365d, 0) + ISNULL(c.avg_loan_balance_365d, 0)) = 0 THEN N'Quan hệ ngủ đông'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 1.20 THEN N'Đang tăng trưởng'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 0.85 THEN N'Ổn định / duy trì'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 0.50 THEN N'Đang thu hẹp'
-            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio < 0.50 THEN N'Suy giảm mạnh'
-            ELSE N'Chưa xác định'
+            WHEN c.num_active_accounts = 0 THEN N'Closed Account'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days <= 90 THEN N'New to Bank'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days BETWEEN 91 AND 365 THEN N'Forming Relationship'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND (ISNULL(c.avg_deposit_balance_365d, 0) + ISNULL(c.avg_loan_balance_365d, 0)) = 0 THEN N'Dormant Relationship'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 1.20 THEN N'Growing'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 0.85 THEN N'Stable / Maintaining'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio >= 0.50 THEN N'Shrinking'
+            WHEN c.num_active_accounts > 0 AND c.relationship_tenure_days > 365 AND c.relationship_trend_ratio < 0.50 THEN N'Sharply Declining'
+            ELSE N'Undetermined'
         END AS life_cycle_segment,
 
         /* 5. Risk segment */
         CASE 
-            WHEN c.worst_debt_group >= 3 OR c.risk_score < 491 THEN N'Xác định rủi ro cao' 
-            WHEN c.risk_score IS NULL THEN N'Chưa có điểm rủi ro' 
-            ELSE N'Xác định rủi ro thấp' 
+            WHEN c.worst_debt_group >= 3 OR c.risk_score < 491 THEN N'High Risk Identified' 
+            WHEN c.risk_score IS NULL THEN N'No Risk Score' 
+            ELSE N'Low Risk Identified' 
         END AS risk_flag,
 
         CASE 
-            WHEN c.total_relationship_value >= @THR_10B THEN N'Xác định giá trị cao'
-            ELSE N'Xác định giá trị thấp' 
+            WHEN c.total_relationship_value >= @THR_10B THEN N'High Value Identified'
+            ELSE N'Low Value Identified' 
         END AS value_flag,
 
         CASE
-            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value >= @THR_10B THEN N'Giá trị cao - Rủi ro cao'
-            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value < @THR_10B THEN N'Giá trị thấp - Rủi ro cao'
-            WHEN (ISNULL(c.worst_debt_group, 0) < 3 AND c.risk_score >= 491) AND c.total_relationship_value >= @THR_10B THEN N'Giá trị cao - Rủi ro thấp'
-            WHEN c.risk_score IS NULL THEN N'Chưa chấm điểm rủi ro'
-            ELSE N'Giá trị thấp - Rủi ro thấp'
+            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value >= @THR_10B THEN N'High Value - High Risk'
+            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value < @THR_10B THEN N'Low Value - High Risk'
+            WHEN (ISNULL(c.worst_debt_group, 0) < 3 AND c.risk_score >= 491) AND c.total_relationship_value >= @THR_10B THEN N'High Value - Low Risk'
+            WHEN c.risk_score IS NULL THEN N'Unscored Risk'
+            ELSE N'Low Value - Low Risk'
         END AS risk_segment
     FROM calc c
 ),
@@ -215,7 +214,7 @@ final_segmented AS (
             /* --- KHỐNG CHẾ CẢNH BÁO TÍN CHẤP LẶT VẶT: ƯU TIÊN SỐ 1 ---
                Lý do: chỉ cần vay và thuộc nhóm nợ trên 3 đều cần được lập dự phòng nợ xấu, bất kể có TSĐB hay không.
                . */
-            WHEN (s.current_loan_balance > 0 AND s.worst_debt_group >= 3) OR (s.current_loan_balance > 0 AND s.risk_segment = N'Giá trị cao - Rủi ro cao' AND s.has_collateral_loan = 0) THEN 1
+            WHEN (s.current_loan_balance > 0 AND s.worst_debt_group >= 3) OR (s.current_loan_balance > 0 AND s.risk_segment = N'High Value - High Risk' AND s.has_collateral_loan = 0) THEN 1
 
             /* --- NHÓM RUỈ RO CẦN ĐÁNH GIÁ GIA HẠN/VAY THÊM: ƯU TIÊN SỐ 2 ---
                Lý do: có thể có lịch sự trả nợ tốt (nhóm nợ 1, 2) nhưng mà risk score cao thì cần được phân chia để xác định có nên cho gia hạn thêm/vay thêm/điều chỉnh lãi suất cao hơn
@@ -223,14 +222,14 @@ final_segmented AS (
              */
             WHEN s.current_loan_balance > 0 
                 AND s.has_collateral_loan = 0
-                AND s.risk_flag = N'Xác định rủi ro cao' -- Hệ thống báo rủi ro (Risk score thấp hoặc CIC ngoài xấu)
+                AND s.risk_flag = N'High Risk Identified' -- Hệ thống báo rủi ro (Risk score thấp hoặc CIC ngoài xấu)
                 THEN 2
 
             /* --- KH GIÁ TRỊ CAO - RỦI RO CAO CÓ TSĐB: ƯU TIÊN SỐ 3 ---
                Lý do: Mục đích để kiểm tra định kỳ tính pháp lý và định giá lại tài sản cho những KH vay nhiều để tránh rủi ro KH khất nợ hoặc trả chậm.
                Và nếu cần để lập dự phòng nợ xấu luôn.
              */
-            WHEN s.risk_segment = N'Giá trị cao - Rủi ro cao' AND s.current_loan_balance > 0 AND s.has_collateral_loan = 1 THEN 3
+            WHEN s.risk_segment = N'High Value - High Risk' AND s.current_loan_balance > 0 AND s.has_collateral_loan = 1 THEN 3
 
             
             /* --- NHÓM RỦI RO TIỀM ẨN KHÁC: ƯU TIÊN SỐ 4 & 5 --- 
@@ -240,8 +239,8 @@ final_segmented AS (
                 Nhóm 4: KH đã sử dụng sản phẩm tiền gửi nhưng không nên tiếp thị sản phẩm vay vì rủi ro hoặc cần thẩm định kỹ trước khi bán sản phẩm vay.
                 Nhóm 5: KH hiện không vay và cũng không dùng sản phẩm tiền gửi. Có thể tiếp thị sản phẩm tiền gửi và hạn chế tiếp thị sản phẩm vay.
             */
-            WHEN s.risk_flag = N'Xác định rủi ro cao' AND current_loan_balance = 0 AND s.relationship_segment IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN 4
-            WHEN s.risk_flag = N'Xác định rủi ro cao' AND current_loan_balance = 0 AND s.relationship_segment NOT IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN 5
+            WHEN s.risk_flag = N'High Risk Identified' AND current_loan_balance = 0 AND s.relationship_segment IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN 4
+            WHEN s.risk_flag = N'High Risk Identified' AND current_loan_balance = 0 AND s.relationship_segment NOT IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN 5
 
             /* =========================================================================
                CỤM 2: KHÁCH HÀNG VIP / GIÁ TRỊ CAO (Rủi ro thấp - Ưu tiên số 6 đến 8)
@@ -251,33 +250,33 @@ final_segmented AS (
                Lý do: Đóng tài khoản (num_closed_accounts_90d > 0) buộc phải đi kèm với 
                xu hướng sụt giảm tài sản (relationship_trend_ratio < 0.95) mới kích hoạt báo động.
                Tránh việc khách VIP đóng 1 cái thẻ tín dụng rác nhưng vẫn gửi thêm tiền mà bị gắn mác "rút vốn". */
-            WHEN s.value_flag = N'Xác định giá trị cao' AND s.num_active_accounts > 0 AND (s.life_cycle_segment IN (N'Đang thu hẹp', N'Suy giảm mạnh') OR (s.num_closed_accounts_90d > 0 AND ISNULL(s.relationship_trend_ratio, 1) < 0.95)) AND s.risk_flag = N'Xác định rủi ro thấp' THEN 6
+            WHEN s.value_flag = N'High Value Identified' AND s.num_active_accounts > 0 AND (s.life_cycle_segment IN (N'Shrinking', N'Sharply Declining') OR (s.num_closed_accounts_90d > 0 AND ISNULL(s.relationship_trend_ratio, 1) < 0.95)) AND s.risk_flag = N'Low Risk Identified' THEN 6
             
             /* --- KHÁCH VIP MỞ RỘNG VÀ CHIẾN LƯỢC TOÀN DIỆN: ƯU TIÊN SỐ 7 VÀ 8 --- */
-            WHEN s.value_flag = N'Xác định giá trị cao' AND s.num_active_accounts > 0 AND s.product_segment IN (N'KH một nhóm sản phẩm', N'KH có sản phẩm nhưng nông nhóm') AND s.risk_flag = N'Xác định rủi ro thấp' THEN 7
-            WHEN s.value_flag = N'Xác định giá trị cao' THEN 8
+            WHEN s.value_flag = N'High Value Identified' AND s.num_active_accounts > 0 AND s.product_segment IN (N'Single Product Group Customer', N'Shallow Product Group Customer') AND s.risk_flag = N'Low Risk Identified' THEN 7
+            WHEN s.value_flag = N'High Value Identified' THEN 8
 
 
             /* =========================================================================
                CỤM 3: KHÁCH HÀNG MỚI & TIỀM NĂNG PHÁT TRIỂN (Ưu tiên số 9 đến 12)
                ========================================================================= */
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'Mới đến ngân hàng', N'Đang hình thành quan hệ') AND (s.relationship_trend_ratio > 1.2 OR s.deposit_trend_ratio > 1.2 OR s.loan_trend_ratio > 1.2) AND s.risk_flag = N'Xác định rủi ro thấp' THEN 9
-            WHEN s.num_active_accounts > 0 AND s.product_segment IN (N'KH một nhóm sản phẩm', N'KH có sản phẩm nhưng nông nhóm') AND s.risk_flag = N'Xác định rủi ro thấp' THEN 10
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Đang hình thành quan hệ' AND s.product_segment = N'KH chưa có sản phẩm' AND s.risk_flag = N'Xác định rủi ro thấp' THEN 11
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'New to Bank', N'Forming Relationship') AND (s.relationship_trend_ratio > 1.2 OR s.deposit_trend_ratio > 1.2 OR s.loan_trend_ratio > 1.2) AND s.risk_flag = N'Low Risk Identified' THEN 9
+            WHEN s.num_active_accounts > 0 AND s.product_segment IN (N'Single Product Group Customer', N'Shallow Product Group Customer') AND s.risk_flag = N'Low Risk Identified' THEN 10
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Forming Relationship' AND s.product_segment = N'No Product Customer' AND s.risk_flag = N'Low Risk Identified' THEN 11
 
             /* --- ƯU TIÊN SỐ 11: KH CÓ TÀI KHOẢN NHƯNG CHƯA SỬ DỤNG SẢN PHẨM ---
             Lý do: Có tài khoản active (ví dụ TK thanh toán nhận lương) nhưng chưa sử dụng bất kỳ sản phẩm tiền gửi/vay nào. Đây là nhóm cần được tiếp cận để kích hoạt sử dụng sản phẩm. */
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'Mới đến ngân hàng', N'Đang hình thành quan hệ') AND s.risk_flag = N'Xác định rủi ro thấp' THEN 12
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'New to Bank', N'Forming Relationship') AND s.risk_flag = N'Low Risk Identified' THEN 12
 
 
             /* =========================================================================
                CỤM 4: KHÁCH HÀNG TRƯỞNG THÀNH & ĐẶC THÙ HÀNH VI (Ưu tiên số 13 đến 17)
                ========================================================================= */
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Đang tăng trưởng' THEN 13
-            WHEN s.num_active_accounts > 0 AND s.product_segment = N'Quan hệ đa sản phẩm' THEN 14
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment = N'Quan hệ cân bằng' THEN 15
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN 16
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Chỉ vay', N'KH thiên đòn bẩy') THEN 17
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Growing' THEN 13
+            WHEN s.num_active_accounts > 0 AND s.product_segment = N'Multi-Product Relationship' THEN 14
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment = N'Balanced Relationship' THEN 15
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN 16
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Loan Only', N'Leverage-Oriented Customer') THEN 17
 
             /* =========================================================================
                CỤM 5: KHÁCH HÀNG DỪNG HOẠT ĐỘNG / NGỦ ĐÔNG (Ưu tiên số 18 & 19)
@@ -287,8 +286,8 @@ final_segmented AS (
                Lý do: Nhóm 18: tài khoản và trạng thái KH còn active chỉ là đã lâu không sử dụng sản phẩm. KH có mối quan hệ lâu dài (> 1 năm) có thể thúc đẩy.
                Nhóm 19: trạng thái KH đã inactive - KH đã không còn hoạt động
              */
-            WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = N'Quan hệ ngủ đông' THEN 18
-            WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = N'Quan hệ ngủ đông' THEN 19
+            WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = N'Dormant Relationship' THEN 18
+            WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = N'Dormant Relationship' THEN 19
 
             /* --- ĐÁY PHỄU KHÁCH HÀNG ĐẠI TRÀ --- */
             ELSE 20
@@ -299,47 +298,33 @@ final_segmented AS (
                giống hệt 100% (Line-by-Line Symmetry) so với khối CASE sinh số ở trên.
                Bất kỳ sai sót nào về thứ tự dòng ở đây sẽ dẫn đến việc lệch tên phân khúc. */
                
-            WHEN (s.current_loan_balance > 0 AND s.worst_debt_group >= 3) OR (s.current_loan_balance > 0 AND s.risk_segment = N'Giá trị cao - Rủi ro cao' AND s.has_collateral_loan = 0) THEN N'Rủi ro cần lập dự phòng nợ xấu' 
-            WHEN s.current_loan_balance > 0 AND s.has_collateral_loan = 0 AND s.risk_flag = N'Xác định rủi ro cao' THEN N'Rủi ro cần giám định lại'
-            WHEN s.risk_segment = N'Giá trị cao - Rủi ro cao' AND s.current_loan_balance > 0 AND s.has_collateral_loan = 1 THEN N'Rủi ro có TSĐB cần kiểm soát'
-            WHEN s.risk_flag = N'Xác định rủi ro cao' AND current_loan_balance = 0 AND s.relationship_segment IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN N'Rủi ro tiềm ẩn - Khách tiền gửi'
-            WHEN s.risk_flag = N'Xác định rủi ro cao' AND current_loan_balance = 0 AND s.relationship_segment NOT IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN N'Rủi ro tiềm ẩn - Chưa có quan hệ sản phẩm'
+            WHEN (s.current_loan_balance > 0 AND s.worst_debt_group >= 3) OR (s.current_loan_balance > 0 AND s.risk_segment = N'High Value - High Risk' AND s.has_collateral_loan = 0) THEN N'Risk - Needs Bad Debt Provision' 
+            WHEN s.current_loan_balance > 0 AND s.has_collateral_loan = 0 AND s.risk_flag = N'High Risk Identified' THEN N'Risk - Needs Re-appraisal'
+            WHEN s.risk_segment = N'High Value - High Risk' AND s.current_loan_balance > 0 AND s.has_collateral_loan = 1 THEN N'Risk with Collateral - Needs Control'
+            WHEN s.risk_flag = N'High Risk Identified' AND current_loan_balance = 0 AND s.relationship_segment IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN N'Potential Risk - Deposit Customer'
+            WHEN s.risk_flag = N'High Risk Identified' AND current_loan_balance = 0 AND s.relationship_segment NOT IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN N'Potential Risk - No Product Relationship'
 
-            WHEN s.value_flag = N'Xác định giá trị cao' AND s.num_active_accounts > 0 AND (s.life_cycle_segment IN (N'Đang thu hẹp', N'Suy giảm mạnh') OR (s.num_closed_accounts_90d > 0 AND ISNULL(s.relationship_trend_ratio, 1) < 0.95)) AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách giá trị cao cần giữ chân'
-            WHEN s.value_flag = N'Xác định giá trị cao' AND s.num_active_accounts > 0 AND s.product_segment IN (N'KH một nhóm sản phẩm', N'KH có sản phẩm nhưng nông nhóm') AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách giá trị cao cần mở rộng quan hệ'
-            WHEN s.value_flag = N'Xác định giá trị cao' THEN N'Khách giá trị cao ổn định'
+            WHEN s.value_flag = N'High Value Identified' AND s.num_active_accounts > 0 AND (s.life_cycle_segment IN (N'Shrinking', N'Sharply Declining') OR (s.num_closed_accounts_90d > 0 AND ISNULL(s.relationship_trend_ratio, 1) < 0.95)) AND s.risk_flag = N'Low Risk Identified' THEN N'High Value Customer - Needs Retention'
+            WHEN s.value_flag = N'High Value Identified' AND s.num_active_accounts > 0 AND s.product_segment IN (N'Single Product Group Customer', N'Shallow Product Group Customer') AND s.risk_flag = N'Low Risk Identified' THEN N'High Value Customer - Needs Relationship Expansion'
+            WHEN s.value_flag = N'High Value Identified' THEN N'Stable High Value Customer'
 
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'Mới đến ngân hàng', N'Đang hình thành quan hệ') AND (s.relationship_trend_ratio > 1.2 OR s.deposit_trend_ratio > 1.2 OR s.loan_trend_ratio > 1.2) AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách mới tiềm năng cao'
-            WHEN s.num_active_accounts > 0 AND s.product_segment IN (N'KH một nhóm sản phẩm', N'KH có sản phẩm nhưng nông nhóm') AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách có tiềm năng bán chéo'
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Đang hình thành quan hệ' AND s.product_segment = N'KH chưa có sản phẩm' AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách thụ động - chưa sử dụng sản phẩm'
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'Mới đến ngân hàng', N'Đang hình thành quan hệ') AND s.risk_flag = N'Xác định rủi ro thấp' THEN N'Khách mới đang xây dựng quan hệ'
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'New to Bank', N'Forming Relationship') AND (s.relationship_trend_ratio > 1.2 OR s.deposit_trend_ratio > 1.2 OR s.loan_trend_ratio > 1.2) AND s.risk_flag = N'Low Risk Identified' THEN N'High Potential New Customer'
+            WHEN s.num_active_accounts > 0 AND s.product_segment IN (N'Single Product Group Customer', N'Shallow Product Group Customer') AND s.risk_flag = N'Low Risk Identified' THEN N'Cross-sell Potential Customer'
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Forming Relationship' AND s.product_segment = N'No Product Customer' AND s.risk_flag = N'Low Risk Identified' THEN N'Passive Customer - No Product Used'
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment IN (N'New to Bank', N'Forming Relationship') AND s.risk_flag = N'Low Risk Identified' THEN N'New Customer - Building Relationship'
 
-            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Đang tăng trưởng' THEN N'Khách trưởng thành' 
-            WHEN s.num_active_accounts > 0 AND s.product_segment = N'Quan hệ đa sản phẩm' THEN N'Khách quan hệ sâu cần duy trì'
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment = N'Quan hệ cân bằng' THEN N'Khách quan hệ cân bằng ổn định' 
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Chỉ tiền gửi', N'KH thặng dư thanh khoản') THEN N'Khách thiên tiền gửi'
-            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Chỉ vay', N'KH thiên đòn bẩy') THEN N'Khách thiên vay'
+            WHEN s.num_active_accounts > 0 AND s.life_cycle_segment = N'Growing' THEN N'Mature Customer' 
+            WHEN s.num_active_accounts > 0 AND s.product_segment = N'Multi-Product Relationship' THEN N'Deep Relationship Customer - Needs Maintenance'
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment = N'Balanced Relationship' THEN N'Stable Balanced Relationship Customer' 
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Deposit Only', N'Liquidity Surplus Customer') THEN N'Deposit-Leaning Customer'
+            WHEN s.num_active_accounts > 0 AND s.relationship_segment IN (N'Loan Only', N'Leverage-Oriented Customer') THEN N'Loan-Leaning Customer'
 
-            WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = N'Quan hệ ngủ đông' THEN N'Khách quan hệ ngủ đông'
-            WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = N'Quan hệ ngủ đông' THEN N'Đã đóng / không hoạt động'
-            ELSE N'Khách nền tảng / quan hệ chuẩn'
+            WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = N'Dormant Relationship' THEN N'Dormant Relationship Customer'
+            WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = N'Dormant Relationship' THEN N'Closed / Inactive'
+            ELSE N'Base Customer / Standard Relationship'
         END AS final_segmentation
     FROM segments s
-)
-
--- SELECT * INTO #CustomerSegments FROM final_segmented;
-
--- BÁO CÁO 1: TỔNG HỢP (KIỂM TRA PHÂN BỔ)
-SELECT 
-    final_segmentation,
-    final_segmentation_priority,
-    COUNT(*) AS num_customers,
-    COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS pct
-FROM #CustomerSegments
-GROUP BY final_segmentation, final_segmentation_priority
-ORDER BY final_segmentation_priority;
-
--- BÁO CÁO 2: DANH SÁCH CHI TIẾT DÀNH CHO RM (FULL DATA ĐỐI CHIẾU)
+),
 SELECT
 fs.as_of_date,
 fs.CIF,
