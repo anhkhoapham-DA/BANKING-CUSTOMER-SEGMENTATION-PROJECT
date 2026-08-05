@@ -136,7 +136,7 @@ calc AS (
 ),
 segments AS (
     SELECT c.*,
-
+         /* 1. Value segment */
        CASE
             WHEN c.current_deposit_balance > @THR_100B AND c.current_loan_balance > @THR_100B THEN N'Large Dual Relationship'
             WHEN c.current_deposit_balance > @THR_100B THEN N'Large Deposit Customer'
