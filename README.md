@@ -41,7 +41,8 @@ A full 360° view of a single selected customer (searchable by CIF & Name) desig
 * **Key Features:** Customer demographics, RM details, balance/trend gauges, and an account-level breakdown table.
 * **💡 Snapshot Insight:** The dynamic Radar Chart and Trend Ratios quickly profile users. For example, CIF 3000001721 is immediately identifiable as a high-value "Deposit-Leaning Customer" (Diamond Plus) with a healthy Deposit Trend Ratio (1.17), providing the RM with clear context before engagement.
 
-<img width="2005" height="1128" alt="Ảnh chụp màn hình 2026-08-06 151643" src="https://github.com/user-attachments/assets/9dfa0be1-e0f7-4773-a3bf-eec09b938192" />
+<img width="2006" height="1129" alt="image" src="https://github.com/user-attachments/assets/11612d17-373a-4c11-a40b-27c3eeb810de" />
+
 
 ### 4. Customer Risk Management
 Monitoring and analysis of at-risk customers to support credit risk departments.
