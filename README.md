@@ -31,7 +31,8 @@ Portfolio-level overview of the entire customer base tracking total customers, b
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-<img width="2005" height="1130" alt="Ảnh chụp màn hình 2026-08-06 151628" src="https://github.com/user-attachments/assets/e1380694-7f77-4f42-b00c-49e1c67c73d1" />
+<img width="2005" height="1128" alt="Ảnh chụp màn hình 2026-08-06 151643" src="https://github.com/user-attachments/assets/c36391ca-c7c6-4df2-bdb1-6ad241010a99" />
+
 
 
 ### 3. Customer Individual Profile
