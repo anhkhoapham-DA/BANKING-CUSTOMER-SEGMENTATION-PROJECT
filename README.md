@@ -77,10 +77,6 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
 
 <img width="2001" height="1127" alt="Ảnh chụp màn hình 2026-08-06 155415" src="https://github.com/user-attachments/assets/a3a22405-bc35-40b2-a5c9-53ff84ec5858" />
 
-
-### Data Model 
-<img width="1706" height="971" alt="Ảnh chụp màn hình 2026-08-06 154119" src="https://github.com/user-attachments/assets/b55e4f61-8065-46b6-aaaa-c3502cf4fa34" />
-
 ---
 
 ## 🔗 Live Demo
