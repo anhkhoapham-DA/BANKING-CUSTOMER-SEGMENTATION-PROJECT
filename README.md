@@ -84,4 +84,7 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
 ---
 
 ## 🔗 Live Demo
-Click here to interact with the dashboard: (https://report.onhandbi.com/public/report?token=eyJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfbGlua19pZCI6NzE0LCJoYXNfcGFzc2NvZGUiOmZhbHNlLCJ0aW1lIjoxNzg2MDA3MDkwfQ.fqGCok1vbkVYaH930QiplMdwROOcC-L0zQogmXjuXrw)
+Click here to interact with the dashboard:
+(https://report.onhandbi.com/public/reporttoken=eyJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfbGlua19pZCI6NzE1LCJoYXNfcGFzc2NvZGUiOmZhbHNlLCJ0aW1lIjoxNzg2MDA3Mjg0fQ.M4cbgQ6xn6y_zWycfSIzMAW2LBwD19wTxxRUeMWqWAU) 
+or
+(https://admin.onhandbi.com/user/report/TVRjME1BPT0=?tenant=ohbi_tenant)
