@@ -31,17 +31,14 @@ Portfolio-level overview of the entire customer base tracking total customers, b
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-<img width="2005" height="1128" alt="Ảnh chụp màn hình 2026-08-06 151643" src="https://github.com/user-attachments/assets/c36391ca-c7c6-4df2-bdb1-6ad241010a99" />
-
-
+<img width="2005" height="1130" alt="Ảnh chụp màn hình 2026-08-06 151628" src="https://github.com/user-attachments/assets/cefe313e-ff25-4176-85f7-5d228deac80c" />
 
 ### 3. Customer Individual Profile
 A full 360° view of a single selected customer (searchable by CIF & Name) designed for Relationship Managers.
 * **Key Features:** Customer demographics, RM details, balance/trend gauges, and an account-level breakdown table.
 * **💡 Snapshot Insight:** The dynamic Radar Chart and Trend Ratios quickly profile users. For example, CIF 3000001721 is immediately identifiable as a high-value "Deposit-Leaning Customer" (Diamond Plus) with a healthy Deposit Trend Ratio (1.17), providing the RM with clear context before engagement.
 
-<img width="2005" height="1128" alt="Ảnh chụp màn hình 2026-08-06 151643" src="https://github.com/user-attachments/assets/c36391ca-c7c6-4df2-bdb1-6ad241010a99" />
-
+<img width="2005" height="1128" alt="Ảnh chụp màn hình 2026-08-06 151643" src="https://github.com/user-attachments/assets/9dfa0be1-e0f7-4773-a3bf-eec09b938192" />
 
 ### 4. Customer Risk Management
 Monitoring and analysis of at-risk customers to support credit risk departments.
