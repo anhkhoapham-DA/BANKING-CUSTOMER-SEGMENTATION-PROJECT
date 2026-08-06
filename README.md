@@ -20,6 +20,9 @@ In the retail and corporate banking sector, understanding customer behavior and 
 
 ## 📊 Dashboard Overview & Key Insights
 
+### 0.Data Model 
+<img width="1706" height="971" alt="Ảnh chụp màn hình 2026-08-06 154119" src="https://github.com/user-attachments/assets/b55e4f61-8065-46b6-aaaa-c3502cf4fa34" />
+
 ### 1. Cover Page
 Landing page introducing the four report sections with a consistent, professional navy/gold theme. Features clickable navigation cards for a seamless user experience.
 
