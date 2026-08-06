@@ -48,9 +48,9 @@ Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
-<img width="2000" height="1121" alt="Ảnh chụp màn hình 2026-08-06 151658" src="https://github.com/user-attachments/assets/6a70d0a6-409e-4924-91b8-4f566e0a262f" />
+<img width="2000" height="1121" alt="Ảnh chụp màn hình 2026-08-06 151658" src="https://github.com/user-attachments/assets/15883c75-9253-437b-8b12-a9235bfcfb02" />
 
-<img width="2004" height="1129" alt="Ảnh chụp màn hình 2026-08-06 151726" src="https://github.com/user-attachments/assets/803d3379-36b5-4e10-ba27-b69451ac06b7" />
+<img width="2004" height="1129" alt="Ảnh chụp màn hình 2026-08-06 151726" src="https://github.com/user-attachments/assets/462c292a-d1c7-448d-9ffc-28f0a3933613" />
 
 
 
@@ -61,21 +61,22 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
   * **Key Features:** Interactive Cross-Sell Matrix mapping row-product vs. column-product ownership.
   * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between mixed real estate loans and corporate real estate projects), leaving vast white space for broader retail expansion campaigns.
 
-<img width="2006" height="1125" alt="image" src="https://github.com/user-attachments/assets/65e77cc5-96ad-47ea-9f84-5b5a587363d5" />
+<img width="2006" height="1125" alt="Ảnh chụp màn hình 2026-08-06 155238" src="https://github.com/user-attachments/assets/3ffc4072-a3e0-45ac-9213-bba5d000c884" />
 
 * **Tab 2: Customer Retention**
   * **Key Features:** Horizontal bar chart ranking customers by balance decline %, alongside a dynamic account maturity tracker.
   * **💡 Snapshot Insight:** Highlights immediate churn risks by pinpointing high-value accounts experiencing sharp balance drops (up to **-11.76%** in deposits). RMs can cross-reference this with impending maturity dates (e.g., spikes in July/August 2026) to intervene preemptively.
 
-<img width="2005" height="1126" alt="Ảnh chụp màn hình 2026-08-06 155306" src="https://github.com/user-attachments/assets/496876b1-1845-430c-909f-bdafe117c945" />
+<img width="2005" height="1126" alt="Ảnh chụp màn hình 2026-08-06 155306" src="https://github.com/user-attachments/assets/b41ffb0c-f67a-4f85-861a-888dc581a40a" />
 
-<img width="2001" height="1122" alt="image" src="https://github.com/user-attachments/assets/93bb1029-8e6a-467f-b3e0-cce692aeea97" />
+<img width="2001" height="1122" alt="Ảnh chụp màn hình 2026-08-06 155317" src="https://github.com/user-attachments/assets/bd5a0abc-2511-4229-9b9e-b2487d807e56" />
 
 * **Tab 3: Customer Activation**
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
   * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department (Phòng Bán lẻ)** bearing the brunt of the backlog (596 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
 
-<img width="2001" height="1127" alt="Ảnh chụp màn hình 2026-08-06 155415" src="https://github.com/user-attachments/assets/6b8d5acc-4cca-45c3-b6ea-a2e1da41de2b" />
+<img width="2001" height="1127" alt="Ảnh chụp màn hình 2026-08-06 155415" src="https://github.com/user-attachments/assets/a3a22405-bc35-40b2-a5c9-53ff84ec5858" />
+
 
 ### Data Model 
 <img width="1706" height="971" alt="Ảnh chụp màn hình 2026-08-06 154119" src="https://github.com/user-attachments/assets/b55e4f61-8065-46b6-aaaa-c3502cf4fa34" />
