@@ -6,7 +6,7 @@ DECLARE @THR_5B   DECIMAL(19,2) = 5000000000.00;   -- 5 Billion
 DECLARE @THR_1B   DECIMAL(19,2) = 1000000000.00;   -- 1 Billion
 DECLARE @THR_100M DECIMAL(19,2) = 100000000.00;    -- 100 Million
 
--- Use the latest common snapshot date between deposits and loans
+
 SELECT @as_of_date = MIN(x.max_date)
 FROM (
     SELECT MAX(ngay) AS max_date FROM dbo.fact_tien_gui
@@ -48,7 +48,7 @@ loan_metrics AS (
 ),
 collateral_check AS (
     SELECT tn.CIF,
-        MAX(CASE WHEN tn.ma_san_pham NOT IN (5501, 5502, 5528, 6000, 6300) THEN 1 ELSE 0 END) AS has_collateral_loan -- unsecured product codes or consumer loans without collateral
+        MAX(CASE WHEN tn.ma_san_pham NOT IN (5501, 5502, 5528, 6000, 6300) THEN 1 ELSE 0 END) AS has_collateral_loan 
     FROM dbo.tk_no tn
     INNER JOIN dbo.fact_du_no fdn ON tn.so_tai_khoan = fdn.so_tai_khoan AND fdn.ngay = @as_of_date
     GROUP BY tn.CIF
@@ -162,7 +162,7 @@ segments AS (
 
         /* 3. Product segment */
         CASE
-        -- REMOVED DEEP MULTI-PRODUCT RELATIONSHIP GROUP
+   
             WHEN c.num_product_group >= 3 AND c.num_products >= 4 THEN N'Multi-Product Relationship'
             WHEN c.num_product_group = 1 AND c.num_products <= 2 THEN N'Single Product Group Customer'
             WHEN c.num_product_group <= 2 AND c.num_products >= 3 THEN N'Shallow Product Group Customer'
@@ -221,7 +221,7 @@ final_segmented AS (
              */
             WHEN s.current_loan_balance > 0 
                 AND s.has_collateral_loan = 0
-                AND s.risk_flag = N'High Risk Identified' -- Risk alert system (Low risk score or bad external CIC)
+                AND s.risk_flag = N'High Risk Identified'
                 THEN 2
 
             /* --- HIGH VALUE - HIGH RISK CUSTOMERS WITH COLLATERAL: PRIORITY 3 ---
@@ -277,11 +277,6 @@ final_segmented AS (
             /* =========================================================================
                GROUP 5: INACTIVE / DORMANT CUSTOMERS (Priority 18 & 19)
                ========================================================================= */
-
-            /* --- MISMATCH FIX SYNCHRONIZATION ---
-               Reason: Group 18: accounts and customer status are still active, just haven't used products for a long time. Customers with long-term relationships (> 1 year) can be promoted.
-               Group 19: customer status is inactive - customer is no longer active
-             */
             WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = N'Dormant Relationship' THEN 18
             WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = N'Dormant Relationship' THEN 19
 
@@ -290,10 +285,6 @@ final_segmented AS (
         END AS final_segmentation_priority,
 
         CASE
-            /* IMPORTANT NOTE: This string-generating CASE block must strictly follow the  
-               exact same condition structure (Line-by-Line Symmetry) as the number-generating CASE block above.
-               Any mistake in row order here will result in segment name misalignment. */
-               
             WHEN (s.current_loan_balance > 0 AND s.worst_debt_group >= 3) OR (s.current_loan_balance > 0 AND s.risk_segment = N'High Value - High Risk' AND s.has_collateral_loan = 0) THEN N'Risk - Needs Bad Debt Provision' 
             WHEN s.current_loan_balance > 0 AND s.has_collateral_loan = 0 AND s.risk_flag = N'High Risk Identified' THEN N'Risk - Needs Re-appraisal'
             WHEN s.risk_segment = N'High Value - High Risk' AND s.current_loan_balance > 0 AND s.has_collateral_loan = 1 THEN N'Risk with Collateral - Needs Control'
