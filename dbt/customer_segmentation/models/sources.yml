@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: banking
+    database: kpimbank
+    schema: dbo
+    tables:
+      - name: fact_du_no
+        description: "Bảng fact lưu trữ dư nợ và thông tin khoản vay"
+      - name: fact_tien_gui
+        description: "Bảng fact lưu trữ số dư và giao dịch tiền gửi"
+      - name: master_can_bo
+      - name: master_khach_hang
+        description: "Bảng thông tin định danh và nhân khẩu học khách hàng"
+      - name: master_khu_vuc
+      - name: master_phan_khuc
+      - name: master_phong_ban
+      - name: master_san_pham
+        description: "Bảng danh mục chi tiết các sản phẩm ngân hàng"
+      - name: tk_no
+        description: "Bảng snapshot thông tin tài khoản vay"
+      - name: tk_tien_gui
+        description: "Bảng snapshot thông tin tài khoản tiền gửi"
