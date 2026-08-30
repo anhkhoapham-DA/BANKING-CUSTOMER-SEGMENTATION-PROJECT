@@ -11,7 +11,7 @@ In the retail and corporate banking sector, understanding customer behavior and 
 * **Targeted Customer Care:** Empowering Relationship Managers (RMs) with data-driven triggers for Cross-Selling, Retention, and Activation.
 * 
 ## 🛠 Tech Stack & Data Architecture
-* **Data Transformation (ELT):** **dbt (Data Build Tool)** & **SQL**. Transitioned from a monolithic SQL script to a modular Medallion architecture (Silver and Gold layers) to process complex customer segmentation logic, improving code maintainability, query performance, and data lineage tracking.
+* **Data Transformation :** **dbt (Data Build Tool)** & **SQL**. Transitioned from a monolithic SQL script to a modular Medallion architecture (Silver and Gold layers) to process complex customer segmentation logic, improving code maintainability, query performance, and data lineage tracking.
 * **Version Control:** **Git & GitHub** for tracking dbt models and ensuring robust version control for the data transformation pipeline.
 * **Business Intelligence:** **Power BI** (Interactive report design, UI/UX optimization).
 * **Data Modeling:** Optimized Star Schema architecture connecting Fact tables with Dimension tables (Customers, Branches, Products). 
