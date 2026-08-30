@@ -9,13 +9,13 @@ In the retail and corporate banking sector, understanding customer behavior and 
 * **Holistic Portfolio Management:** Providing a macro-view of customer distribution across 19 lifecycle and risk segments.
 * **Proactive Risk Mitigation:** Tracking at-risk accounts, monitoring debt groups, and forecasting NPL (Non-Performing Loan) provisioning needs.
 * **Targeted Customer Care:** Empowering Relationship Managers (RMs) with data-driven triggers for Cross-Selling, Retention, and Activation.
-
+* 
 ## 🛠 Tech Stack & Data Architecture
-* **Data Preparation & Transformation:** SQL (Customer segmentation logic, data cleansing).
-* **Business Intelligence:** Power BI (Interactive report design, UI/UX optimization).
-* **Data Modeling:** Optimized Star Schema architecture connecting Fact tables with Dimension tables (Customers, Branches, Products).
-* **Advanced Analytics:** DAX (Custom measures for risk scoring, trend ratios, cross-sell matrix logic, and dynamic maturity tracking).
-
+* **Data Transformation (ELT):** **dbt (Data Build Tool)** & **SQL**. Transitioned from a monolithic SQL script to a modular Medallion architecture (Silver and Gold layers) to process complex customer segmentation logic, improving code maintainability, query performance, and data lineage tracking.
+* **Version Control:** **Git & GitHub** for tracking dbt models and ensuring robust version control for the data transformation pipeline.
+* **Business Intelligence:** **Power BI** (Interactive report design, UI/UX optimization).
+* **Data Modeling:** Optimized Star Schema architecture connecting Fact tables with Dimension tables (Customers, Branches, Products). 
+* **Advanced Analytics:** **DAX** (Custom measures for risk scoring, trend ratios, cross-sell matrix logic, and dynamic maturity tracking).
 ---
 
 ## 📊 Dashboard Overview & Key Insights
