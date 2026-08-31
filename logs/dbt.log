@@ -1,0 +1,30 @@
+[0m10:04:40.010553 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B29D957A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B29FFBFD90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B29FFBF9D0>]}
+
+
+============================== 10:04:40.021070 | 71a31006-54ac-4ded-beeb-3ac6c81bc7e6 ==============================
+[0m10:04:40.021070 [info ] [MainThread]: Running with dbt=1.12.0
+[0m10:04:40.022216 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'version_check': 'True', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\anhkh\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt docs generate', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'logs'}
+[0m10:04:40.023866 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m10:04:40.025784 [debug] [MainThread]: Command `dbt docs generate` failed at 10:04:40.025536 after 0.27 seconds
+[0m10:04:40.026453 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2A00050F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B29FF8E7B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B29FFDFDF0>]}
+[0m10:04:40.027121 [debug] [MainThread]: Flushing usage events
+[0m10:04:41.340358 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m10:04:43.883300 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6AF57A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6D577D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6D577610>]}
+
+
+============================== 10:04:43.887871 | 7ae65525-86c1-494c-9d1c-427c5c942809 ==============================
+[0m10:04:43.887871 [info ] [MainThread]: Running with dbt=1.12.0
+[0m10:04:43.888713 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\anhkh\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'invocation_command': 'dbt docs serve', 'log_path': 'logs'}
+[0m10:04:43.889270 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m10:04:43.890477 [debug] [MainThread]: Command `dbt docs serve` failed at 10:04:43.890329 after 0.19 seconds
+[0m10:04:43.890854 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6D6202B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6D4329F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CE6D5BA140>]}
+[0m10:04:43.891237 [debug] [MainThread]: Flushing usage events
+[0m10:04:45.156994 [debug] [MainThread]: An error was encountered while trying to flush usage events
