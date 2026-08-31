@@ -40,7 +40,7 @@ A full 360° view of a single selected customer (searchable by CIF & Name) desig
 * **Key Features:** Customer demographics, RM details, balance/trend gauges, and an account-level breakdown table.
 * **💡 Snapshot Insight:** The dynamic Radar Chart and Trend Ratios quickly profile users. For example, CIF 3000001721 is immediately identifiable as a high-value "Deposit-Leaning Customer" (Diamond Plus) with a healthy Deposit Trend Ratio (1.17), providing the RM with clear context before engagement.
 
-<img width="2244" height="1262" alt="Ảnh chụp màn hình 2026-08-25 213826" src="https://github.com/user-attachments/assets/83a46446-8c55-4f59-b8e5-4994bcc08723" />
+<img width="1441" height="808" alt="image" src="https://github.com/user-attachments/assets/d563b959-ca79-4040-a917-1fbf558e02f6" />
 
 ### 4. Customer Risk Management
 Monitoring and analysis of at-risk customers to support credit risk departments.
@@ -59,21 +59,21 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
   * **Key Features:** Interactive Cross-Sell Matrix mapping row-product vs. column-product ownership.
   * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between mixed real estate loans and corporate real estate projects), leaving vast white space for broader retail expansion campaigns.
 
-<img width="2239" height="1259" alt="Ảnh chụp màn hình 2026-08-25 213908" src="https://github.com/user-attachments/assets/ba03283a-c2b3-473f-95e8-4a5a22ec1623" />
+<img width="1442" height="808" alt="image" src="https://github.com/user-attachments/assets/5dc194cf-7f36-4f51-aa9e-85032129e579" />
 
 * **Tab 2: Customer Retention**
   * **Key Features:** Horizontal bar chart ranking customers by balance decline %, alongside a dynamic account maturity tracker.
   * **💡 Snapshot Insight:** Highlights immediate churn risks by pinpointing high-value accounts experiencing sharp balance drops (up to **-11.76%** in deposits). RMs can cross-reference this with impending maturity dates (e.g., spikes in July/August 2026) to intervene preemptively.
 
-<img width="2244" height="1257" alt="Ảnh chụp màn hình 2026-08-25 214121" src="https://github.com/user-attachments/assets/2d5a670c-4385-4c53-94db-876a1de510ec" />
+<img width="1444" height="810" alt="image" src="https://github.com/user-attachments/assets/1bfbe536-4bab-45bf-bf9b-6a62e91bcbe6" />
 
-<img width="2247" height="1259" alt="Ảnh chụp màn hình 2026-08-25 214054" src="https://github.com/user-attachments/assets/1bda2f98-09fb-49ad-b54f-b7546fbb2846" />
+<img width="1441" height="809" alt="image" src="https://github.com/user-attachments/assets/ae80752a-57dd-4356-ab0a-712dbe7aa4d8" />
 
 * **Tab 3: Customer Activation**
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
   * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department (Phòng Bán lẻ)** bearing the brunt of the backlog (596 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
 
-<img width="2247" height="1263" alt="Ảnh chụp màn hình 2026-08-25 213931" src="https://github.com/user-attachments/assets/4dd0231a-3331-48d4-8032-5cc62765dd44" />
+<img width="1441" height="810" alt="image" src="https://github.com/user-attachments/assets/5b2c56ae-aa04-406b-9199-708f9acb6c04" />
 
 ---
 
