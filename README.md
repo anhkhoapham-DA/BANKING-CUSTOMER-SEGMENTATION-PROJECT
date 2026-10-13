@@ -26,34 +26,34 @@ customer_segmentation/
 │   ├── schema.yml                        
 │   │
 │   ├── bronze/                           # Data processing layer
-│   │   ├── bronze_customer.sql           # Processes customer data
-│   │   ├── bronze_customer_segment.sql   # Processes customer segment data
-│   │   ├── bronze_department.sql         # Processes department data
-│   │   ├── bronze_deposit_account.sql    # Processes deposit account data
-│   │   ├── bronze_deposit_balance.sql    # Processes deposit balance data
-│   │   ├── bronze_loan_account.sql       # Processes loan account data
-│   │   ├── bronze_loan_balance.sql       # Processes loan balance data
-│   │   ├── bronze_product.sql            # Processes product data
-│   │   ├── bronze_region.sql             # Processes region data
-│   │   └── bronze_staff.sql              # Processes staff data
+│   │   ├── bronze_customer.sql         
+│   │   ├── bronze_customer_segment.sql   
+│   │   ├── bronze_department.sql       
+│   │   ├── bronze_deposit_account.sql  
+│   │   ├── bronze_deposit_balance.sql 
+│   │   ├── bronze_loan_account.sql   
+│   │   ├── bronze_loan_balance.sql 
+│   │   ├── bronze_product.sql
+│   │   ├── bronze_region.sql
+│   │   └── bronze_staff.sql       
 │   │
 │   ├── silver/                           # Customer-level business metrics
-│   │   ├── silver_as_of_date.sql         # Single snapshot date shared by all Silver models
-│   │   ├── silver_customer.sql           # Customer attributes joined with segment name
-│   │   ├── silver_fact_du_no_asof.sql    # Loan balances at the snapshot date
-│   │   ├── silver_fact_tien_gui_asof.sql # Deposit balances at the snapshot date
-│   │   ├── silver_deposit_metrics.sql    # Current and average deposit balances per customer
-│   │   ├── silver_loan_metrics.sql       # Loan balances, debt group, collateral flag per customer
-│   │   ├── silver_product_metrics.sql    # Number of products and product groups per customer
-│   │   ├── silver_tenure_metrics.sql     # Relationship start date and tenure per customer
-│   │   └── silver_account_metrics.sql    # Active and recently closed account counts
+│   │   ├── silver_as_of_date.sql    
+│   │   ├── silver_customer.sql              
+│   │   ├── silver_fact_du_no_asof.sql          
+│   │   ├── silver_fact_tien_gui_asof.sql       
+│   │   ├── silver_deposit_metrics.sql     
+│   │   ├── silver_loan_metrics.sql         
+│   │   ├── silver_product_metrics.sql      
+│   │   ├── silver_tenure_metrics.sql     
+│   │   └── silver_account_metrics.sql            
 │   │
 │   └── gold/                             # Segmentation and reporting tables for Power BI
-│       ├── gold_customer_base.sql        # One row per customer combining all Silver metrics
+│       ├── gold_customer_base.sql                # One row per customer combining all Silver metrics
 │       ├── gold_customer_sub_segments.sql        # Value, relationship, life cycle, product, risk flags
 │       ├── gold_customer_final_segmentation.sql  # Combines 5 dimensions into 20 customer segments
-│       ├── gold_customer_360.sql         # Customer-level table for the Customer 360 page
-│       └── gold_cross_sell_matrix.sql    # Product affinity matrix for cross-sell opportunities
+│       ├── gold_customer_360.sql                 # Customer-level table for the Customer 360 page
+│       └── gold_cross_sell_matrix.sql            # Product affinity matrix for cross-sell opportunities
 │
 ├── macros/
 │   └── translate_term_type.sql           # Reusable macro for term type labels
