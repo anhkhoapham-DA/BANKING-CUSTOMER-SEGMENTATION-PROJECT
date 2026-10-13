@@ -21,7 +21,7 @@ In the retail and corporate banking sector, understanding customer behavior and 
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
-<img width="1830" height="661" alt="image" src="https://github.com/user-attachments/assets/a2c50219-6b8e-4076-8ee3-0af2b384a16a" />
+<img width="1843" height="663" alt="image" src="https://github.com/user-attachments/assets/f625efeb-0ad2-465d-9d02-4d29ec0bb5ee" />
 
 ### 1. Data Model 
 <img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />
@@ -36,7 +36,8 @@ Portfolio-level overview of the entire customer base tracking total customers, b
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-<img width="1442" height="807" alt="image" src="https://github.com/user-attachments/assets/f9ad9b20-eeee-4c46-9dc1-4ac18e1d9921" />
+<img width="1439" height="807" alt="image" src="https://github.com/user-attachments/assets/d63435da-fdf7-4057-a0df-96cf8bdc6424" />
+
 
 ### 4. Customer Individual Profile
 A full 360° view of a single selected customer (searchable by CIF & Name) designed for Relationship Managers.
@@ -50,9 +51,10 @@ Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
-<img width="1441" height="809" alt="Ảnh chụp màn hình 2026-10-13 115441" src="https://github.com/user-attachments/assets/efd792e5-d96c-4cf0-8fd1-5881da0b9ec7" />
+<img width="1299" height="729" alt="image" src="https://github.com/user-attachments/assets/b79702ce-24d9-488c-b790-f10518c0bb4a" />
 
-<img width="1442" height="805" alt="Ảnh chụp màn hình 2026-10-13 115451" src="https://github.com/user-attachments/assets/b0602fb0-7909-49c6-be89-1d1a1ad86fbb" />
+![Uploading image.png…]()
+
 
 ### 6. Customer Care Solutions
 An actionable, three-tab section supporting CRM activities with a persistent left-hand KPI panel.
