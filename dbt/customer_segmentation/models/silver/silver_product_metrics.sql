@@ -1,26 +1,26 @@
 {{ config(materialized='view') }}
 
 WITH product_base AS (
-    SELECT DISTINCT tg.CIF, tg.ma_san_pham
-    FROM {{ source('banking', 'tk_tien_gui') }} AS tg
-    INNER JOIN {{ ref('silver_fact_tien_gui_asof') }} AS ftg
-        ON tg.so_tai_khoan = ftg.so_tai_khoan
-    WHERE tg.ma_san_pham IS NOT NULL
+    SELECT DISTINCT deposit_account.customer_id, deposit_account.product_id
+    FROM {{ ref('bronze_deposit_account') }} AS deposit_account
+    INNER JOIN {{ ref('silver_fact_tien_gui_asof') }} AS balance
+        ON deposit_account.account_number = balance.account_number
+    WHERE deposit_account.product_id IS NOT NULL
 
     UNION
 
-    SELECT DISTINCT tn.CIF, tn.ma_san_pham
-    FROM {{ source('banking', 'tk_no') }} AS tn
-    INNER JOIN {{ source('banking', 'fact_du_no') }} AS fdn
-        ON tn.so_tai_khoan = fdn.so_tai_khoan
-    WHERE tn.ma_san_pham IS NOT NULL
+    SELECT DISTINCT loan_account.customer_id, loan_account.product_id
+    FROM {{ ref('bronze_loan_account') }} AS loan_account
+    INNER JOIN {{ ref('silver_fact_du_no_asof') }} AS balance
+        ON loan_account.account_number = balance.account_number
+    WHERE loan_account.product_id IS NOT NULL
 )
 
 SELECT
-    pb.CIF,
-    COUNT(DISTINCT pb.ma_san_pham) AS num_products,
-    COUNT(DISTINCT msp.nhom_san_pham) AS num_product_group
-FROM product_base pb
-LEFT JOIN {{ source('banking', 'master_san_pham') }} AS msp
-    ON pb.ma_san_pham = msp.ma_sp
-GROUP BY pb.CIF
+    product_base.customer_id,
+    COUNT(DISTINCT product_base.product_id) AS num_products,
+    COUNT(DISTINCT product.product_group) AS num_product_group
+FROM product_base
+LEFT JOIN {{ ref('bronze_product') }} AS product
+    ON product_base.product_id = product.product_id
+GROUP BY product_base.customer_id

@@ -1,0 +1,151 @@
+[0m09:31:35.899678 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019496C77A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000194992E7D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000194992E79D0>]}
+
+
+============================== 09:31:35.913502 | 6f110a2f-4bca-4560-80e7-a7b4df64870f ==============================
+[0m09:31:35.913502 [info ] [MainThread]: Running with dbt=1.12.0
+[0m09:31:35.914775 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\anhkh\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'invocation_command': 'dbt docs generate', 'log_path': 'logs'}
+[0m09:31:35.916457 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m09:31:35.919206 [debug] [MainThread]: Command `dbt docs generate` failed at 09:31:35.918354 after 0.31 seconds
+[0m09:31:35.920294 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000194993390F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000194992BE7B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001949930FDF0>]}
+[0m09:31:35.921186 [debug] [MainThread]: Flushing usage events
+[0m09:31:37.215302 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:31:46.083967 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266AD8C7A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266AFEE7ED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266AFEE7750>]}
+
+
+============================== 09:31:46.090419 | ea05fb29-3090-44da-9c96-e5cb7843df6a ==============================
+[0m09:31:46.090419 [info ] [MainThread]: Running with dbt=1.12.0
+[0m09:31:46.091320 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\anhkh\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt debug', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'logs'}
+[0m09:31:46.116828 [info ] [MainThread]: dbt version: 1.12.0
+[0m09:31:46.117690 [info ] [MainThread]: python version: 3.13.9
+[0m09:31:46.118279 [info ] [MainThread]: python path: C:\Users\anhkh\anaconda3\python.exe
+[0m09:31:46.118778 [info ] [MainThread]: os info: Windows-11-10.0.26300-SP0
+[0m09:31:46.414497 [info ] [MainThread]: Using profiles dir at C:\Users\anhkh\.dbt
+[0m09:31:46.415449 [info ] [MainThread]: Using profiles.yml file at C:\Users\anhkh\.dbt\profiles.yml
+[0m09:31:46.416174 [info ] [MainThread]: Using dbt_project.yml file at C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml
+[0m09:31:46.416890 [info ] [MainThread]: adapter type: sqlserver
+[0m09:31:46.417553 [info ] [MainThread]: adapter version: 1.10.1
+[0m09:31:46.418259 [info ] [MainThread]: Configuration:
+[0m09:31:46.418968 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m09:31:46.419531 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m09:31:46.420352 [info ] [MainThread]: Required dependencies:
+[0m09:31:46.421559 [debug] [MainThread]: Executing "git --help"
+[0m09:31:46.480531 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m09:31:46.481467 [debug] [MainThread]: STDERR: "b''"
+[0m09:31:46.482256 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m09:31:46.483024 [info ] [MainThread]: Connection:
+[0m09:31:46.483834 [info ] [MainThread]:   driver: ODBC Driver 17 for SQL Server
+[0m09:31:46.484502 [info ] [MainThread]:   server: ANHKHOA\SQLEXPRESS
+[0m09:31:46.485053 [info ] [MainThread]:   port: 1433
+[0m09:31:46.485574 [info ] [MainThread]:   database: kpimbank
+[0m09:31:46.486066 [info ] [MainThread]:   schema: dbo
+[0m09:31:46.486758 [info ] [MainThread]:   UID: None
+[0m09:31:46.487427 [info ] [MainThread]:   authentication: sql
+[0m09:31:46.487945 [info ] [MainThread]:   windows_login: True
+[0m09:31:46.488612 [info ] [MainThread]:   retries: 3
+[0m09:31:46.489407 [info ] [MainThread]:   login_timeout: 0
+[0m09:31:46.490131 [info ] [MainThread]:   query_timeout: 0
+[0m09:31:46.491065 [info ] [MainThread]:   trace_flag: False
+[0m09:31:46.491798 [info ] [MainThread]:   encrypt: True
+[0m09:31:46.492479 [info ] [MainThread]:   trust_cert: True
+[0m09:31:46.493101 [info ] [MainThread]:   backend: pyodbc
+[0m09:31:46.494254 [info ] [MainThread]: Registered adapter: sqlserver=1.10.1
+[0m09:31:46.846879 [warn ] [MainThread]: [[33mWARNING[0m]: When True, uses SQL Server-native string type mappings: STRING -> VARCHAR(MAX), NCHAR -> NCHAR(1), NVARCHAR -> NVARCHAR(4000). When False (default), preserves legacy mappings: STRING and NVARCHAR -> VARCHAR(8000), NCHAR -> CHAR(1). The new behaviour is intended to become the default in a future release.
+You may opt into the new behavior sooner by setting `flags.dbt_sqlserver_use_native_string_types` to `True` in `dbt_project.yml`.
+Visit https://docs.getdbt.com/reference/global-configs/behavior-changes for more information.
+[0m09:31:46.847645 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'BehaviorChangeEvent', 'label': 'ea05fb29-3090-44da-9c96-e5cb7843df6a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266B03CF490>]}
+[0m09:31:46.848106 [warn ] [MainThread]: [[33mWARNING[0m]: When True, dbt transaction hooks (begin/commit) emit real T-SQL BEGIN TRANSACTION / COMMIT TRANSACTION statements. When False (default and legacy), begin/commit are no-ops and each statement is auto-committed by the driver. This means earlier successful statements are not rolled back if a later statement fails. This behavior is intended to become the default in a future release.
+You may opt into the new behavior sooner by setting `flags.dbt_sqlserver_use_dbt_transactions` to `True` in `dbt_project.yml`.
+Visit https://docs.getdbt.com/reference/global-configs/behavior-changes for more information.
+[0m09:31:46.848695 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'BehaviorChangeEvent', 'label': 'ea05fb29-3090-44da-9c96-e5cb7843df6a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266B045A140>]}
+[0m09:31:46.849264 [debug] [MainThread]: Acquiring new sqlserver connection 'debug'
+[0m09:31:46.849621 [debug] [MainThread]: Using sqlserver connection "debug"
+[0m09:31:46.849931 [debug] [MainThread]: On debug: select 1 as id
+[0m09:31:46.850215 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:31:46.856837 [debug] [MainThread]: sqlserver adapter: Using connection string: DRIVER={ODBC Driver 17 for SQL Server};SERVER=ANHKHOA\SQLEXPRESS;Database=kpimbank;Trusted_Connection=yes;encrypt=Yes;TrustServerCertificate=Yes;APP=dbt-sqlserver/1.10.1;Pooling=true;SQL_ATTR_TRACE=SQL_OPT_TRACE_OFF;ConnectRetryCount=3;ConnectRetryInterval=10
+[0m09:31:47.063823 [debug] [MainThread]: sqlserver adapter: Connected to db: kpimbank
+[0m09:31:47.065512 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m09:31:47.067012 [debug] [MainThread]: On debug: Close
+[0m09:31:47.067553 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m09:31:47.068138 [info ] [MainThread]: [31m1 check failed:[0m
+[0m09:31:47.068760 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml> not found
+
+[0m09:31:47.070235 [debug] [MainThread]: Command `dbt debug` failed at 09:31:47.070030 after 1.19 seconds
+[0m09:31:47.070721 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:31:47.071202 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266AFD4FA50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266B000AE50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000266B03C1220>]}
+[0m09:31:47.071707 [debug] [MainThread]: Flushing usage events
+[0m09:31:48.119675 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:33:42.711517 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478C347A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478E967ED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478E967750>]}
+
+
+============================== 09:33:42.717570 | 7c0390ed-8c55-4b5c-bb5a-470f88c87910 ==============================
+[0m09:33:42.717570 [info ] [MainThread]: Running with dbt=1.12.0
+[0m09:33:42.718450 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\anhkh\\.dbt', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'logs'}
+[0m09:33:42.737017 [info ] [MainThread]: dbt version: 1.12.0
+[0m09:33:42.737435 [info ] [MainThread]: python version: 3.13.9
+[0m09:33:42.738249 [info ] [MainThread]: python path: C:\Users\anhkh\anaconda3\python.exe
+[0m09:33:42.738898 [info ] [MainThread]: os info: Windows-11-10.0.26300-SP0
+[0m09:33:42.908926 [info ] [MainThread]: Using profiles dir at C:\Users\anhkh\.dbt
+[0m09:33:42.909799 [info ] [MainThread]: Using profiles.yml file at C:\Users\anhkh\.dbt\profiles.yml
+[0m09:33:42.910208 [info ] [MainThread]: Using dbt_project.yml file at C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml
+[0m09:33:42.910566 [info ] [MainThread]: adapter type: sqlserver
+[0m09:33:42.910959 [info ] [MainThread]: adapter version: 1.10.1
+[0m09:33:42.911726 [info ] [MainThread]: Configuration:
+[0m09:33:42.912130 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m09:33:42.912596 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m09:33:42.912990 [info ] [MainThread]: Required dependencies:
+[0m09:33:42.913426 [debug] [MainThread]: Executing "git --help"
+[0m09:33:42.964975 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m09:33:42.965757 [debug] [MainThread]: STDERR: "b''"
+[0m09:33:42.966346 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m09:33:42.966856 [info ] [MainThread]: Connection:
+[0m09:33:42.967454 [info ] [MainThread]:   driver: ODBC Driver 17 for SQL Server
+[0m09:33:42.968076 [info ] [MainThread]:   server: ANHKHOA\SQLEXPRESS
+[0m09:33:42.968615 [info ] [MainThread]:   port: 1433
+[0m09:33:42.969137 [info ] [MainThread]:   database: kpimbank
+[0m09:33:42.969679 [info ] [MainThread]:   schema: dbo
+[0m09:33:42.970229 [info ] [MainThread]:   UID: None
+[0m09:33:42.970839 [info ] [MainThread]:   authentication: sql
+[0m09:33:42.971393 [info ] [MainThread]:   windows_login: True
+[0m09:33:42.971839 [info ] [MainThread]:   retries: 3
+[0m09:33:42.972446 [info ] [MainThread]:   login_timeout: 0
+[0m09:33:42.972973 [info ] [MainThread]:   query_timeout: 0
+[0m09:33:42.973371 [info ] [MainThread]:   trace_flag: False
+[0m09:33:42.973880 [info ] [MainThread]:   encrypt: True
+[0m09:33:42.974389 [info ] [MainThread]:   trust_cert: True
+[0m09:33:42.974795 [info ] [MainThread]:   backend: pyodbc
+[0m09:33:42.975522 [info ] [MainThread]: Registered adapter: sqlserver=1.10.1
+[0m09:33:43.339878 [warn ] [MainThread]: [[33mWARNING[0m]: When True, uses SQL Server-native string type mappings: STRING -> VARCHAR(MAX), NCHAR -> NCHAR(1), NVARCHAR -> NVARCHAR(4000). When False (default), preserves legacy mappings: STRING and NVARCHAR -> VARCHAR(8000), NCHAR -> CHAR(1). The new behaviour is intended to become the default in a future release.
+You may opt into the new behavior sooner by setting `flags.dbt_sqlserver_use_native_string_types` to `True` in `dbt_project.yml`.
+Visit https://docs.getdbt.com/reference/global-configs/behavior-changes for more information.
+[0m09:33:43.340689 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'BehaviorChangeEvent', 'label': '7c0390ed-8c55-4b5c-bb5a-470f88c87910', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478EE3F490>]}
+[0m09:33:43.341122 [warn ] [MainThread]: [[33mWARNING[0m]: When True, dbt transaction hooks (begin/commit) emit real T-SQL BEGIN TRANSACTION / COMMIT TRANSACTION statements. When False (default and legacy), begin/commit are no-ops and each statement is auto-committed by the driver. This means earlier successful statements are not rolled back if a later statement fails. This behavior is intended to become the default in a future release.
+You may opt into the new behavior sooner by setting `flags.dbt_sqlserver_use_dbt_transactions` to `True` in `dbt_project.yml`.
+Visit https://docs.getdbt.com/reference/global-configs/behavior-changes for more information.
+[0m09:33:43.341641 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'BehaviorChangeEvent', 'label': '7c0390ed-8c55-4b5c-bb5a-470f88c87910', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478EECA140>]}
+[0m09:33:43.342095 [debug] [MainThread]: Acquiring new sqlserver connection 'debug'
+[0m09:33:43.342408 [debug] [MainThread]: Using sqlserver connection "debug"
+[0m09:33:43.342673 [debug] [MainThread]: On debug: select 1 as id
+[0m09:33:43.342931 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:33:43.345827 [debug] [MainThread]: sqlserver adapter: Using connection string: DRIVER={ODBC Driver 17 for SQL Server};SERVER=ANHKHOA\SQLEXPRESS;Database=kpimbank;Trusted_Connection=yes;encrypt=Yes;TrustServerCertificate=Yes;APP=dbt-sqlserver/1.10.1;Pooling=true;SQL_ATTR_TRACE=SQL_OPT_TRACE_OFF;ConnectRetryCount=3;ConnectRetryInterval=10
+[0m09:33:43.383696 [debug] [MainThread]: sqlserver adapter: Connected to db: kpimbank
+[0m09:33:43.385035 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m09:33:43.386463 [debug] [MainThread]: On debug: Close
+[0m09:33:43.387040 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m09:33:43.387914 [info ] [MainThread]: [31m1 check failed:[0m
+[0m09:33:43.388494 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Project\BANKING-CUSTOMER-SEGMENTATION-PROJECT\dbt_project.yml> not found
+
+[0m09:33:43.389864 [debug] [MainThread]: Command `dbt debug` failed at 09:33:43.389669 after 0.86 seconds
+[0m09:33:43.390360 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:33:43.390848 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478E7CFA50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478EA8AE50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002478EE31220>]}
+[0m09:33:43.391360 [debug] [MainThread]: Flushing usage events
+[0m09:33:44.528918 [debug] [MainThread]: An error was encountered while trying to flush usage events

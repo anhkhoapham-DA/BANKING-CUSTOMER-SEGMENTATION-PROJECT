@@ -1,17 +1,8 @@
 {{ config(materialized='view') }}
 
-WITH as_of_date AS (
-    SELECT MIN(max_date) AS as_of_date
-    FROM (
-        SELECT MAX(ngay) AS max_date FROM {{ source('banking', 'fact_tien_gui') }}
-        UNION ALL
-        SELECT MAX(ngay) AS max_date FROM {{ source('banking', 'fact_du_no') }}
-    ) x
-)
-
 SELECT
-    ftg.*,
+    deposit_balance.*,
     ao.as_of_date
-FROM {{ source('banking', 'fact_tien_gui') }} AS ftg
-CROSS JOIN as_of_date ao
-WHERE ftg.ngay = ao.as_of_date
+FROM {{ ref('bronze_deposit_balance') }} AS deposit_balance
+CROSS JOIN {{ ref('silver_as_of_date') }} AS ao
+WHERE deposit_balance.balance_date = ao.as_of_date

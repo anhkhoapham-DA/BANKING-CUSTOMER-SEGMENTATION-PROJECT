@@ -184,8 +184,9 @@ segments AS (
         END AS life_cycle_segment,
 
         /* 5. Risk segment */
+        /* Experimental cutoff: score <= 446 is a weak, in-sample Youden result on historical debt group 3+. */
         CASE 
-            WHEN c.worst_debt_group >= 3 OR c.risk_score < 491 THEN N'High Risk Identified' 
+            WHEN c.worst_debt_group >= 3 OR c.risk_score <= 446 THEN N'High Risk Identified'
             WHEN c.risk_score IS NULL THEN N'No Risk Score' 
             ELSE N'Low Risk Identified' 
         END AS risk_flag,
@@ -196,9 +197,9 @@ segments AS (
         END AS value_flag,
 
         CASE
-            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value >= @THR_10B THEN N'High Value - High Risk'
-            WHEN (c.worst_debt_group >= 3 OR c.risk_score < 491) AND c.total_relationship_value < @THR_10B THEN N'Low Value - High Risk'
-            WHEN (ISNULL(c.worst_debt_group, 0) < 3 AND c.risk_score >= 491) AND c.total_relationship_value >= @THR_10B THEN N'High Value - Low Risk'
+            WHEN (c.worst_debt_group >= 3 OR c.risk_score <= 446) AND c.total_relationship_value >= @THR_10B THEN N'High Value - High Risk'
+            WHEN (c.worst_debt_group >= 3 OR c.risk_score <= 446) AND c.total_relationship_value < @THR_10B THEN N'Low Value - High Risk'
+            WHEN (ISNULL(c.worst_debt_group, 0) < 3 AND c.risk_score > 446) AND c.total_relationship_value >= @THR_10B THEN N'High Value - Low Risk'
             WHEN c.risk_score IS NULL THEN N'Unscored Risk'
             ELSE N'Low Value - Low Risk'
         END AS risk_segment

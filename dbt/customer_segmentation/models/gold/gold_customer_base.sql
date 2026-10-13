@@ -2,17 +2,17 @@
 
 WITH base AS (
     SELECT
-        kh.CIF,
-        kh.ten_khach_hang,
-        kh.ma_phan_khuc,
-        kh.ten_phan_khuc,
-        kh.loai_phan_khuc,
-        kh.phan_loai,
-        kh.ten_quan,
-        kh.nhom_tuoi,
-        kh.nghe_nghiep,
-        kh.trang_thai,
-        kh.diem_rui_ro AS risk_score,
+        kh.customer_id AS CIF,
+        kh.customer_name AS ten_khach_hang,
+        kh.segment_id AS ma_phan_khuc,
+        kh.segment_name AS ten_phan_khuc,
+        kh.segment_type AS loai_phan_khuc,
+        kh.customer_type AS phan_loai,
+        kh.district_name AS ten_quan,
+        kh.age_group AS nhom_tuoi,
+        kh.occupation AS nghe_nghiep,
+        kh.customer_status AS trang_thai,
+        kh.risk_score,
 
         COALESCE(dm.current_deposit_balance, 0)  AS current_deposit_balance,
         COALESCE(dm.avg_deposit_balance_90d, 0)  AS avg_deposit_balance_90d,
@@ -36,12 +36,12 @@ WITH base AS (
         COALESCE(am.num_active_accounts, 0)      AS num_active_accounts,
         COALESCE(am.num_closed_accounts_90d, 0)  AS num_closed_accounts_90d
 
-    FROM {{ source('banking', 'master_khach_hang') }} AS kh
-    LEFT JOIN {{ ref('silver_deposit_metrics') }} AS dm ON kh.CIF = dm.CIF
-    LEFT JOIN {{ ref('silver_loan_metrics') }}    AS lm ON kh.CIF = lm.CIF
-    LEFT JOIN {{ ref('silver_product_metrics') }} AS pm ON kh.CIF = pm.CIF
-    LEFT JOIN {{ ref('silver_tenure_metrics') }}  AS tm ON kh.CIF = tm.CIF
-    LEFT JOIN {{ ref('silver_account_metrics') }} AS am ON kh.CIF = am.CIF
+    FROM {{ ref('silver_customer') }} AS kh
+    LEFT JOIN {{ ref('silver_deposit_metrics') }} AS dm ON kh.customer_id = dm.customer_id
+    LEFT JOIN {{ ref('silver_loan_metrics') }}    AS lm ON kh.customer_id = lm.customer_id
+    LEFT JOIN {{ ref('silver_product_metrics') }} AS pm ON kh.customer_id = pm.customer_id
+    LEFT JOIN {{ ref('silver_tenure_metrics') }}  AS tm ON kh.customer_id = tm.customer_id
+    LEFT JOIN {{ ref('silver_account_metrics') }} AS am ON kh.customer_id = am.customer_id
 )
 
 SELECT

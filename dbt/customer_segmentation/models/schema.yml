@@ -1,0 +1,157 @@
+version: 2
+
+models:
+  - name: bronze_customer
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_customer
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_customer_segment
+    columns:
+      - name: segment_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_department
+    columns:
+      - name: department_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_deposit_account
+    columns:
+      - name: account_number
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_loan_account
+    columns:
+      - name: account_number
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_product
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_region
+    columns:
+      - name: district_name
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bronze_staff
+    columns:
+      - name: staff_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_account_metrics
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_deposit_metrics
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_loan_metrics
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_product_metrics
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_tenure_metrics
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_as_of_date
+    columns:
+      - name: as_of_date
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_fact_du_no_asof
+    columns:
+      - name: account_number
+        data_tests:
+          - not_null
+          - unique
+
+  - name: silver_fact_tien_gui_asof
+    columns:
+      - name: account_number
+        data_tests:
+          - not_null
+          - unique
+
+  - name: gold_customer_base
+    columns:
+      - name: CIF
+        data_tests:
+          - not_null
+          - unique
+
+  - name: gold_customer_final_segmentation
+    columns:
+      - name: CIF
+        data_tests:
+          - not_null
+          - unique
+
+  - name: gold_customer_segmentation
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: gold_customer_segments
+    columns:
+      - name: CIF
+        data_tests:
+          - not_null
+          - unique
+
+seeds:
+  - name: product_mapping
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique

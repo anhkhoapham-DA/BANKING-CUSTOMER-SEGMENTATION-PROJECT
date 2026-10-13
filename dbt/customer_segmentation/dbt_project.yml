@@ -28,3 +28,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   customer_segmentation:
     +materialized: view
+
+seeds:
+  customer_segmentation:
+    product_mapping:
+      +column_types:
+        product_id: varchar(50)
+        product_name: nvarchar(255)
+        product_short_name: nvarchar(255)
+        product_group: nvarchar(255)
