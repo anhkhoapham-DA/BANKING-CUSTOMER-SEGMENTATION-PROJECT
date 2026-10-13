@@ -18,6 +18,7 @@ In the retail and corporate banking sector, understanding customer behavior and 
 * **Advanced Analytics:** **DAX** (Custom measures for risk scoring, trend ratios, cross-sell matrix logic, and dynamic maturity tracking).
 ---
 ## Project Structure
+```
 C:.
 ├───analyses
 ├───analysis
@@ -56,7 +57,8 @@ C:.
 │           └───models
 │               └───example
 │                   └───analytics
-└───tests 
+└───tests
+```
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
