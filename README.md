@@ -36,7 +36,7 @@ Portfolio-level overview of the entire customer base tracking total customers, b
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-![Uploading image.png…]()
+<img width="1439" height="807" alt="image" src="https://github.com/user-attachments/assets/d63435da-fdf7-4057-a0df-96cf8bdc6424" />
 
 
 ### 4. Customer Individual Profile
@@ -51,9 +51,10 @@ Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
-<img width="1441" height="809" alt="Ảnh chụp màn hình 2026-10-13 115441" src="https://github.com/user-attachments/assets/efd792e5-d96c-4cf0-8fd1-5881da0b9ec7" />
+<img width="1299" height="729" alt="image" src="https://github.com/user-attachments/assets/b79702ce-24d9-488c-b790-f10518c0bb4a" />
 
-<img width="1442" height="805" alt="Ảnh chụp màn hình 2026-10-13 115451" src="https://github.com/user-attachments/assets/b0602fb0-7909-49c6-be89-1d1a1ad86fbb" />
+![Uploading image.png…]()
+
 
 ### 6. Customer Care Solutions
 An actionable, three-tab section supporting CRM activities with a persistent left-hand KPI panel.
