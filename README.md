@@ -4,20 +4,59 @@
 
 A comprehensive Power BI solution for banking customer segmentation, combining SQL-based data preparation with an interactive 4-page reporting experience. This dashboard provides a 360-degree view of the customer portfolio, enabling stakeholders to monitor risk, evaluate individual profiles, and drive actionable customer care solutions.
 
-## 🎯 Business Objective
+## Business Objective
 In the retail and corporate banking sector, understanding customer behavior and lifecycle stages is critical. This dashboard addresses key business needs by:
 * **Holistic Portfolio Management:** Providing a macro-view of customer distribution across 19 lifecycle and risk segments.
 * **Proactive Risk Mitigation:** Tracking at-risk accounts, monitoring debt groups, and forecasting NPL (Non-Performing Loan) provisioning needs.
 * **Targeted Customer Care:** Empowering Relationship Managers (RMs) with data-driven triggers for Cross-Selling, Retention, and Activation.
 * 
-## 🛠 Tech Stack & Data Architecture
+## Tech Stack & Data Architecture
 * **Data Transformation :** **dbt (Data Build Tool)** & **SQL**. Transitioned from a monolithic SQL script to a modular Medallion architecture (Bronze, Silver, and Gold layers) to standardize source data, process complex customer segmentation logic, and improve code maintainability and data lineage tracking.
 * **Version Control:** **Git & GitHub** for tracking dbt models and ensuring robust version control for the data transformation pipeline.
 * **Business Intelligence:** **Power BI** (Interactive report design, UI/UX optimization).
 * **Data Modeling:** Optimized Star Schema architecture connecting Fact tables with Dimension tables (Customers, Branches, Products). 
 * **Advanced Analytics:** **DAX** (Custom measures for risk scoring, trend ratios, cross-sell matrix logic, and dynamic maturity tracking).
 ---
-
+## Project Structure
+C:.
+├───analyses
+├───analysis
+├───dbt_packages
+├───logs
+├───macros
+├───models
+│   ├───bronze
+│   ├───gold
+│   └───silver
+├───seeds
+├───snapshots
+├───target
+│   ├───compiled
+│   │   ├───customer_segmentation
+│   │   │   ├───from remote system.sql
+│   │   │   │   └───sql
+│   │   │   └───models
+│   │   │       ├───bronze
+│   │   │       ├───gold
+│   │   │       ├───schema.yml
+│   │   │       └───silver
+│   │   └───demoproject
+│   │       └───models
+│   │           └───example
+│   │               └───analytics
+│   └───run
+│       ├───customer_segmentation
+│       │   ├───models
+│       │   │   ├───bronze
+│       │   │   ├───gold
+│       │   │   ├───schema.yml
+│       │   │   └───silver
+│       │   └───seeds
+│       └───demoproject
+│           └───models
+│               └───example
+│                   └───analytics
+└───tests 
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
