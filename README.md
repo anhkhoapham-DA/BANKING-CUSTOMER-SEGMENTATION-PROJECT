@@ -19,45 +19,46 @@ In the retail and corporate banking sector, understanding customer behavior and 
 ---
 ## Project Structure
 ```
-C:.
-├───analyses
-├───analysis
-├───dbt_packages
-├───logs
-├───macros
+├───dbt_project.yml           
 ├───models
+│   │   schema.yml
+│   │   sources.yml
+│   │   
 │   ├───bronze
+│   │       bronze_customer.sql
+│   │       bronze_customer_segment.sql
+│   │       bronze_department.sql
+│   │       bronze_deposit_account.sql
+│   │       bronze_deposit_balance.sql
+│   │       bronze_loan_account.sql
+│   │       bronze_loan_balance.sql
+│   │       bronze_product.sql
+│   │       bronze_region.sql
+│   │       bronze_staff.sql
+│   │       
 │   ├───gold
+│   │       gold_cross_sell_matrix.sql
+│   │       gold_customer_360.sql
+│   │       gold_customer_base.sql
+│   │       gold_customer_final_segmentation.sql
+│   │       gold_customer_sub_segments.sql
+│   │       
 │   └───silver
-├───seeds
-├───snapshots
-├───target
-│   ├───compiled
-│   │   ├───customer_segmentation
-│   │   │   ├───from remote system.sql
-│   │   │   │   └───sql
-│   │   │   └───models
-│   │   │       ├───bronze
-│   │   │       ├───gold
-│   │   │       ├───schema.yml
-│   │   │       └───silver
-│   │   └───demoproject
-│   │       └───models
-│   │           └───example
-│   │               └───analytics
-│   └───run
-│       ├───customer_segmentation
-│       │   ├───models
-│       │   │   ├───bronze
-│       │   │   ├───gold
-│       │   │   ├───schema.yml
-│       │   │   └───silver
-│       │   └───seeds
-│       └───demoproject
-│           └───models
-│               └───example
-│                   └───analytics
-└───tests
+│           silver_account_metrics.sql
+│           silver_as_of_date.sql
+│           silver_customer.sql
+│           silver_deposit_metrics.sql
+│           silver_fact_du_no_asof.sql
+│           silver_fact_tien_gui_asof.sql
+│           silver_loan_metrics.sql
+│           silver_product_metrics.sql
+│           silver_tenure_metrics.sql
+├── macros/
+│   └── translate_term_type.sql
+├── seeds/
+│   └── product_mapping.csv
+└── analysis/
+    └── risk_score_eda.ipynb    
 ```
 ## 📊 Dashboard Overview & Key Insights
 
