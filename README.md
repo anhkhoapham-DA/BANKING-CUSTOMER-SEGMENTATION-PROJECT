@@ -20,60 +20,73 @@ In the retail and corporate banking sector, understanding customer behavior and 
 
 ## 📊 Dashboard Overview & Key Insights
 
-### 0. Data Model 
-<img width="1706" height="971" alt="Ảnh chụp màn hình 2026-08-06 154119" src="https://github.com/user-attachments/assets/b55e4f61-8065-46b6-aaaa-c3502cf4fa34" />
+### 0. dbt docs
+<img width="1835" height="692" alt="image" src="https://github.com/user-attachments/assets/37a8154d-1a7a-4a07-8490-52276aa9c6fb" />
 
-### 1. Cover Page
+### 1. Data Model 
+<img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />
+
+
+### 2. Cover Page
 Landing page introducing the four report sections with a consistent, professional navy/gold theme. Features clickable navigation cards for a seamless user experience.
 
-<img width="2242" height="1258" alt="Ảnh chụp màn hình 2026-08-25 213804" src="https://github.com/user-attachments/assets/7a945a9a-38e2-451c-a642-9896a41ee4c5" />
+<img width="1440" height="808" alt="Ảnh chụp màn hình 2026-10-13 115412" src="https://github.com/user-attachments/assets/01706b51-b081-44dd-871f-ea70a1326635" />
 
-### 2. Customer 360
+
+### 3. Customer 360
 Portfolio-level overview of the entire customer base tracking total customers, balances, and macro-trends.
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-<img width="2240" height="1261" alt="Ảnh chụp màn hình 2026-08-25 213814" src="https://github.com/user-attachments/assets/18922ac4-db2a-47ea-bdb8-af52e64d339e" />
+<img width="1440" height="806" alt="Ảnh chụp màn hình 2026-10-13 115423" src="https://github.com/user-attachments/assets/c5fb6f46-61a1-4dc3-8038-e8279146083c" />
 
-### 3. Customer Individual Profile
+
+### 4. Customer Individual Profile
 A full 360° view of a single selected customer (searchable by CIF & Name) designed for Relationship Managers.
 * **Key Features:** Customer demographics, RM details, balance/trend gauges, and an account-level breakdown table.
 * **💡 Snapshot Insight:** The dynamic Radar Chart and Trend Ratios quickly profile users. For example, CIF 3000001721 is immediately identifiable as a high-value "Deposit-Leaning Customer" (Diamond Plus) with a healthy Deposit Trend Ratio (1.17), providing the RM with clear context before engagement.
 
-<img width="1441" height="808" alt="image" src="https://github.com/user-attachments/assets/d563b959-ca79-4040-a917-1fbf558e02f6" />
+<img width="1440" height="809" alt="Ảnh chụp màn hình 2026-10-13 115432" src="https://github.com/user-attachments/assets/cc062205-7ba0-4a66-a10e-15cb58d9907d" />
 
-### 4. Customer Risk Management
+
+### 5. Customer Risk Management
 Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
 
-<img width="2238" height="1258" alt="Ảnh chụp màn hình 2026-08-25 213837" src="https://github.com/user-attachments/assets/ae5c6b3f-34de-49a9-a8f1-abe7f34fd70e" />
+<img width="1441" height="809" alt="Ảnh chụp màn hình 2026-10-13 115441" src="https://github.com/user-attachments/assets/efd792e5-d96c-4cf0-8fd1-5881da0b9ec7" />
 
-<img width="2245" height="1260" alt="Ảnh chụp màn hình 2026-08-25 213849" src="https://github.com/user-attachments/assets/dc9eddad-4914-4905-bbe8-afec36ad1cd2" />
 
-### 5. Customer Care Solutions
+<img width="1442" height="805" alt="Ảnh chụp màn hình 2026-10-13 115451" src="https://github.com/user-attachments/assets/b0602fb0-7909-49c6-be89-1d1a1ad86fbb" />
+
+
+### 6. Customer Care Solutions
 An actionable, three-tab section supporting CRM activities with a persistent left-hand KPI panel.
 
 * **Tab 1: Customer Expansion**
   * **Key Features:** Interactive Cross-Sell Matrix mapping row-product vs. column-product ownership.
   * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between mixed real estate loans and corporate real estate projects), leaving vast white space for broader retail expansion campaigns.
 
-<img width="1442" height="808" alt="image" src="https://github.com/user-attachments/assets/5dc194cf-7f36-4f51-aa9e-85032129e579" />
+<img width="1439" height="809" alt="image" src="https://github.com/user-attachments/assets/5c734fb4-78b0-473c-942b-61aaeccd272b" />
+
 
 * **Tab 2: Customer Retention**
   * **Key Features:** Horizontal bar chart ranking customers by balance decline %, alongside a dynamic account maturity tracker.
   * **💡 Snapshot Insight:** Highlights immediate churn risks by pinpointing high-value accounts experiencing sharp balance drops (up to **-11.76%** in deposits). RMs can cross-reference this with impending maturity dates (e.g., spikes in July/August 2026) to intervene preemptively.
 
-<img width="1444" height="810" alt="image" src="https://github.com/user-attachments/assets/1bfbe536-4bab-45bf-bf9b-6a62e91bcbe6" />
+<img width="1438" height="808" alt="image" src="https://github.com/user-attachments/assets/3c84e53f-2cb7-473b-94e5-d36e62433d99" />
 
-<img width="1441" height="809" alt="image" src="https://github.com/user-attachments/assets/ae80752a-57dd-4356-ab0a-712dbe7aa4d8" />
+
+<img width="1442" height="806" alt="image" src="https://github.com/user-attachments/assets/135f15b3-c695-4e41-8785-20a365407844" />
+
 
 * **Tab 3: Customer Activation**
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
   * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department (Phòng Bán lẻ)** bearing the brunt of the backlog (596 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
 
-<img width="1441" height="810" alt="image" src="https://github.com/user-attachments/assets/5b2c56ae-aa04-406b-9199-708f9acb6c04" />
+<img width="1441" height="808" alt="image" src="https://github.com/user-attachments/assets/2da8c577-dd3f-412a-b6e2-16292239a539" />
+
 
 ---
 ## 🔗 Live Dashboard
