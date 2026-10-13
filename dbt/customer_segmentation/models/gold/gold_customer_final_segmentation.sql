@@ -108,4 +108,4 @@ SELECT
         ELSE 'Base Customer / Standard Relationship'
     END AS final_segmentation
 
-FROM {{ ref('gold_customer_segments') }} s
+FROM {{ ref('gold_customer_sub_segments') }} s
