@@ -21,7 +21,7 @@ In the retail and corporate banking sector, understanding customer behavior and 
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
-<img width="1830" height="661" alt="image" src="https://github.com/user-attachments/assets/a2c50219-6b8e-4076-8ee3-0af2b384a16a" />
+<img width="1843" height="663" alt="image" src="https://github.com/user-attachments/assets/f625efeb-0ad2-465d-9d02-4d29ec0bb5ee" />
 
 ### 1. Data Model 
 <img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />
