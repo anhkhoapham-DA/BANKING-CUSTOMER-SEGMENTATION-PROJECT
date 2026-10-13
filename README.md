@@ -51,9 +51,9 @@ Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
-<img width="1299" height="729" alt="image" src="https://github.com/user-attachments/assets/b79702ce-24d9-488c-b790-f10518c0bb4a" />
+<img width="1303" height="730" alt="image" src="https://github.com/user-attachments/assets/65ab0c42-ac94-434d-85c8-c9c9f925a2a8" />
 
-![Uploading image.png…]()
+<img width="1299" height="729" alt="image" src="https://github.com/user-attachments/assets/b79702ce-24d9-488c-b790-f10518c0bb4a" />
 
 
 ### 6. Customer Care Solutions
