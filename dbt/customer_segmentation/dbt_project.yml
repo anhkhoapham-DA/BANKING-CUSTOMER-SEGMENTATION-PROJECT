@@ -4,7 +4,7 @@ version: '1.0.0'
 profile: 'customer_segmentation'
 
 model-paths: ["models"]
-analysis-paths: ["analysis"]
+analysis-paths: ["analyses"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 
