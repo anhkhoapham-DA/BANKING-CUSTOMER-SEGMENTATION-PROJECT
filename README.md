@@ -61,6 +61,10 @@ customer_segmentation/
 │   └── product_mapping.csv               # Product mapping reference (115 products)
 └── analysis/
     └── risk_score_eda.ipynb              # EDA: legacy risk score vs actual debt group
+│
+├──snapshots
+│
+├──tests
 ```
 ## 📊 Dashboard Overview & Key Insights
 
