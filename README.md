@@ -1,4 +1,4 @@
-# KPIM Customer Segmentation Dashboard 🏦📊
+# Banking Customer Segmentation Project 🏦📊
 
 > **Disclaimer:** Data used in this project is simulated for demonstration purposes and does not represent real customer or account information.
 
