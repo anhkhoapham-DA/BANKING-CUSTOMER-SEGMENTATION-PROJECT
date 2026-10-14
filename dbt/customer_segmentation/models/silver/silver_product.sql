@@ -5,7 +5,7 @@ WITH cleaned_source AS (
         NULLIF(LTRIM(RTRIM(ma_sp)), '') AS product_id,
         NULLIF(LTRIM(RTRIM(ten_san_pham)), '') AS product_name_source,
         NULLIF(LTRIM(RTRIM(nhom_san_pham)), '') AS product_group_source
-    FROM {{ source('banking', 'master_san_pham') }}
+    FROM {{ ref('bronze_product') }}
 )
 
 SELECT

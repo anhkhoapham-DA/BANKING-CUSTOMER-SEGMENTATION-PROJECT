@@ -4,7 +4,7 @@ WITH cleaned_source AS (
     SELECT
         NULLIF(LTRIM(RTRIM(ma_phong_ban)), '') AS department_id,
         NULLIF(LTRIM(RTRIM(ten_phong_ban)), '') AS department_name_source
-    FROM {{ source('banking', 'master_phong_ban') }}
+    FROM {{ ref('bronze_department') }}
 )
 
 SELECT

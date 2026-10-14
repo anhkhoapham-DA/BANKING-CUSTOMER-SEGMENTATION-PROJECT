@@ -7,4 +7,4 @@ SELECT
     CAST(so_du_tien_gui_ngay_quy_doi AS DECIMAL(19, 2)) AS daily_balance_local_currency,
     CAST(so_du_tien_gui_bq_quy_quy_doi AS DECIMAL(19, 2)) AS quarterly_average_balance_local_currency,
     CAST(so_du_tien_gui_bq_nam_quy_doi AS DECIMAL(19, 2)) AS annual_average_balance_local_currency
-FROM {{ source('banking', 'fact_tien_gui') }}
+FROM {{ ref('bronze_deposit_balance') }}

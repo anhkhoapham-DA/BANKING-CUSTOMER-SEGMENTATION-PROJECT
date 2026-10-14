@@ -15,7 +15,7 @@ WITH cleaned_source AS (
         NULLIF(LTRIM(RTRIM(loai_ky_han)), '') AS term_type_source,
         CAST(ky_han AS DECIMAL(10, 2)) AS term_months,
         CAST(lai_suat AS DECIMAL(9, 6)) AS interest_rate
-    FROM {{ source('banking', 'tk_tien_gui') }}
+    FROM {{ ref('bronze_deposit_account') }}
 )
 
 SELECT

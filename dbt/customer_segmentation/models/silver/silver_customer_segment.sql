@@ -4,7 +4,7 @@ WITH cleaned_source AS (
     SELECT
         NULLIF(LTRIM(RTRIM(ma_phan_khuc)), '') AS segment_id,
         NULLIF(LTRIM(RTRIM(loai_phan_lhuc)), '') AS segment_type_source
-    FROM {{ source('banking', 'master_phan_khuc') }}
+    FROM {{ ref('bronze_customer_segment') }}
 )
 
 SELECT

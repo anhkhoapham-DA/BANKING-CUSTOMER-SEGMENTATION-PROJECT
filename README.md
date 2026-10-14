@@ -76,7 +76,7 @@ customer_segmentation/
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
-<img width="1817" height="763" alt="image" src="https://github.com/user-attachments/assets/7c44e276-3599-4b16-94d2-457cea98af18" />
+<img width="1848" height="627" alt="image" src="https://github.com/user-attachments/assets/627c5803-fab5-464c-82bd-d0795ddcf388" />
 
 ### 1. Data Model 
 <img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />

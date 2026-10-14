@@ -8,4 +8,4 @@ SELECT
     CAST(du_no_ngay_quy_doi AS DECIMAL(19, 2)) AS daily_balance_local_currency,
     CAST(du_no_bq_quy_quy_doi AS DECIMAL(19, 2)) AS quarterly_average_balance_local_currency,
     CAST(du_no_bq_nam_quy_doi AS DECIMAL(19, 2)) AS annual_average_balance_local_currency
-FROM {{ source('banking', 'fact_du_no') }}
+FROM {{ ref('bronze_loan_balance') }}

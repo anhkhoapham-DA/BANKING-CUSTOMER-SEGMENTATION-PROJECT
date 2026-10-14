@@ -7,7 +7,7 @@ WITH cleaned_source AS (
         NULLIF(LTRIM(RTRIM(CAST(ma_phong_ban AS VARCHAR(50)))), '') AS department_id,
         NULLIF(LTRIM(RTRIM(gioi_tinh)), '') AS gender_source,
         NULLIF(LTRIM(RTRIM(chuc_vu)), '') AS job_title_source
-    FROM {{ source('banking', 'master_can_bo') }}
+    FROM {{ ref('bronze_staff') }}
 )
 
 SELECT

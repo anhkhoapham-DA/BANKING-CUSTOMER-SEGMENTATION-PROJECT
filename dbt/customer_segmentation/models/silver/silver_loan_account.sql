@@ -15,7 +15,7 @@ WITH cleaned_source AS (
         CAST(ngay_giai_ngan_dau_tien AS DATE) AS first_disbursement_date,
         CAST(ngay_giai_ngan_gan_nhat AS DATE) AS latest_disbursement_date,
         CAST(ngay_dong_tai_khoan AS DATE) AS account_close_date
-    FROM {{ source('banking', 'tk_no') }}
+    FROM {{ ref('bronze_loan_account') }}
 )
 
 SELECT

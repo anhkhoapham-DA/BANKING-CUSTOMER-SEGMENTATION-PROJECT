@@ -8,7 +8,7 @@ WITH cleaned_source AS (
         CAST(mat_do AS INT) AS population_density_per_sq_km,
         CAST(lat AS DECIMAL(9, 6)) AS latitude,
         CAST(long AS DECIMAL(9, 6)) AS longitude
-    FROM {{ source('banking', 'master_khu_vuc') }}
+    FROM {{ ref('bronze_region') }}
 )
 
 SELECT
