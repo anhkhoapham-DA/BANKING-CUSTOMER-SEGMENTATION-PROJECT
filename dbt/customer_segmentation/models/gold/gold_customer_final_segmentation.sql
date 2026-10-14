@@ -74,7 +74,7 @@ SELECT
         /* =========================================================================
            GROUP 5: INACTIVE / DORMANT CUSTOMERS (Priority 18 & 19)
            ========================================================================= */
-        WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = 'Dormant Relationship' THEN 18
+        WHEN s.customer_status = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = 'Dormant Relationship' THEN 18
         WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = 'Dormant Relationship' THEN 19
 
         /* --- BOTTOM OF FUNNEL MASS CUSTOMERS --- */
@@ -103,7 +103,7 @@ SELECT
         WHEN s.num_active_accounts > 0 AND s.relationship_segment IN ('Deposit Only', 'Liquidity Surplus Customer') THEN 'Deposit-Leaning Customer'
         WHEN s.num_active_accounts > 0 AND s.relationship_segment IN ('Loan Only', 'Leverage-Oriented Customer') THEN 'Loan-Leaning Customer'
 
-        WHEN s.trang_thai = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = 'Dormant Relationship' THEN 'Dormant Relationship Customer'
+        WHEN s.customer_status = 'Active' AND s.num_active_accounts > 0 AND s.life_cycle_segment = 'Dormant Relationship' THEN 'Dormant Relationship Customer'
         WHEN (s.num_active_accounts = 0 AND s.current_deposit_balance = 0 AND s.current_loan_balance = 0) OR s.life_cycle_segment = 'Dormant Relationship' THEN 'Closed / Inactive'
         ELSE 'Base Customer / Standard Relationship'
     END AS final_segmentation

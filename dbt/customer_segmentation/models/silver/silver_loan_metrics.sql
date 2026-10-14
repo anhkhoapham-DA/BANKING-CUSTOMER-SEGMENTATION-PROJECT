@@ -10,7 +10,7 @@ WITH loan_metrics AS (
         END) AS num_loan_accounts,
         COUNT(DISTINCT loan_account.account_number) AS num_historical_loan_accounts,
         MAX(COALESCE(balance.debt_group, 0)) AS worst_debt_group
-    FROM {{ ref('bronze_loan_account') }} AS loan_account
+    FROM {{ ref('silver_loan_account') }} AS loan_account
     LEFT JOIN {{ ref('silver_fact_du_no_asof') }} AS balance
         ON loan_account.account_number = balance.account_number
     GROUP BY loan_account.customer_id
@@ -23,7 +23,7 @@ collateral_check AS (
             WHEN loan_account.product_id NOT IN ('5501', '5502', '5528', '6000', '6300') THEN 1
             ELSE 0
         END) AS has_collateral_loan
-    FROM {{ ref('bronze_loan_account') }} AS loan_account
+    FROM {{ ref('silver_loan_account') }} AS loan_account
     INNER JOIN {{ ref('silver_fact_du_no_asof') }} AS balance
         ON loan_account.account_number = balance.account_number
     GROUP BY loan_account.customer_id

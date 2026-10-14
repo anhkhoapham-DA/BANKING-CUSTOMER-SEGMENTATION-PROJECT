@@ -2,7 +2,7 @@
 
 WITH relationship_start_base AS (
     SELECT customer_id, account_open_date AS relationship_start_date
-    FROM {{ ref('bronze_deposit_account') }}
+    FROM {{ ref('silver_deposit_account') }}
     WHERE account_open_date IS NOT NULL
 
     UNION ALL
@@ -10,7 +10,7 @@ WITH relationship_start_base AS (
     SELECT
         customer_id,
         COALESCE(first_disbursement_date, account_open_date) AS relationship_start_date
-    FROM {{ ref('bronze_loan_account') }}
+    FROM {{ ref('silver_loan_account') }}
     WHERE COALESCE(first_disbursement_date, account_open_date) IS NOT NULL
 ),
 

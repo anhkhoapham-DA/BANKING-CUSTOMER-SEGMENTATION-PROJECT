@@ -25,7 +25,7 @@ customer_segmentation/
 │   ├── sources.yml                       
 │   ├── schema.yml                        
 │   │
-│   ├── bronze/                           # Data processing layer
+│   ├── bronze/                           
 │   │   ├── bronze_customer.sql         
 │   │   ├── bronze_customer_segment.sql   
 │   │   ├── bronze_department.sql       
@@ -37,16 +37,25 @@ customer_segmentation/
 │   │   ├── bronze_region.sql
 │   │   └── bronze_staff.sql       
 │   │
-│   ├── silver/                           # Customer-level business metrics
-│   │   ├── silver_as_of_date.sql    
-│   │   ├── silver_customer.sql              
-│   │   ├── silver_fact_du_no_asof.sql          
-│   │   ├── silver_fact_tien_gui_asof.sql       
-│   │   ├── silver_deposit_metrics.sql     
-│   │   ├── silver_loan_metrics.sql         
-│   │   ├── silver_product_metrics.sql      
-│   │   ├── silver_tenure_metrics.sql     
-│   │   └── silver_account_metrics.sql            
+│   ├── silver/                           # Data processing layer and customer-level business metrics
+│   │   ├── silver_account_metrics.sql
+│   │   ├── silver_as_of_date.sql
+│   │   ├── silver_customer.sql
+│   │   ├── silver_customer_segment.sql
+│   │   ├── silver_department.sql
+│   │   ├── silver_deposit_account.sql
+│   │   ├── silver_deposit_balance.sql
+│   │   ├── silver_deposit_metrics.sql
+│   │   ├── silver_fact_du_no_asof.sql
+│   │   ├── silver_fact_tien_gui_asof.sql
+│   │   ├── silver_loan_account.sql
+│   │   ├── silver_loan_balance.sql
+│   │   ├── silver_loan_metrics.sql
+│   │   ├── silver_product.sql
+│   │   ├── silver_product_metrics.sql
+│   │   ├── silver_region.sql
+│   │   ├── silver_staff.sql
+│   │   ├── silver_tenure_metrics.sql          
 │   │
 │   └── gold/                             # Segmentation and reporting tables for Power BI
 │       ├── gold_customer_base.sql                # One row per customer combining all Silver metrics
@@ -67,13 +76,13 @@ customer_segmentation/
 ## 📊 Dashboard Overview & Key Insights
 
 ### 0. dbt docs
-<img width="1843" height="663" alt="image" src="https://github.com/user-attachments/assets/f625efeb-0ad2-465d-9d02-4d29ec0bb5ee" />
+<img width="1817" height="763" alt="image" src="https://github.com/user-attachments/assets/7c44e276-3599-4b16-94d2-457cea98af18" />
 
 ### 1. Data Model 
 <img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />
 
 ### 2. Cover Page
-Landing page introducing the four report sections with a consistent, professional navy/gold theme. Features clickable navigation cards for a seamless user experience.
+Landing page introducing the four report sections with a consistent. Features clickable navigation cards for a seamless user experience.
 
 <img width="1440" height="808" alt="Ảnh chụp màn hình 2026-10-13 115412" src="https://github.com/user-attachments/assets/01706b51-b081-44dd-871f-ea70a1326635" />
 
@@ -108,7 +117,7 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
   * **Key Features:** Interactive Cross-Sell Matrix mapping row-product vs. column-product ownership.
   * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between mixed real estate loans and corporate real estate projects), leaving vast white space for broader retail expansion campaigns.
 
-<img width="1442" height="806" alt="image" src="https://github.com/user-attachments/assets/0eee1f22-dc6c-4709-9b65-1e1a983e1d94" />
+<img width="1240" height="694" alt="Ảnh chụp màn hình 2026-10-14 203841" src="https://github.com/user-attachments/assets/bf410954-f9f3-4fd0-a2e7-98f212d70f2b" />
 
 * **Tab 2: Customer Retention**
   * **Key Features:** Horizontal bar chart ranking customers by balance decline %, alongside a dynamic account maturity tracker.

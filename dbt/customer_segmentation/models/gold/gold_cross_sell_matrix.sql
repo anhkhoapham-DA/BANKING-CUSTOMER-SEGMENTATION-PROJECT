@@ -2,7 +2,7 @@
 
 WITH product_base AS (
     SELECT DISTINCT deposit_account.customer_id, deposit_account.product_id
-    FROM {{ ref('bronze_deposit_account') }} AS deposit_account
+    FROM {{ ref('silver_deposit_account') }} AS deposit_account
     INNER JOIN {{ ref('silver_fact_tien_gui_asof') }} AS balance
         ON deposit_account.account_number = balance.account_number
     WHERE deposit_account.product_id IS NOT NULL
@@ -10,7 +10,7 @@ WITH product_base AS (
     UNION
 
     SELECT DISTINCT loan_account.customer_id, loan_account.product_id
-    FROM {{ ref('bronze_loan_account') }} AS loan_account
+    FROM {{ ref('silver_loan_account') }} AS loan_account
     INNER JOIN {{ ref('silver_fact_du_no_asof') }} AS balance
         ON loan_account.account_number = balance.account_number
     WHERE loan_account.product_id IS NOT NULL
@@ -20,7 +20,7 @@ customer_product AS (
         pb.customer_id,
         product.product_group
     FROM product_base AS pb
-    INNER JOIN {{ ref('bronze_product') }} AS product
+    INNER JOIN {{ ref('silver_product') }} AS product
         ON pb.product_id = product.product_id
 ),
 pair AS (

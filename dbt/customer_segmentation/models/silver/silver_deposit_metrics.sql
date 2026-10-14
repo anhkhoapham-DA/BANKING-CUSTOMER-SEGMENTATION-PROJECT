@@ -8,7 +8,7 @@ SELECT
     COUNT(DISTINCT CASE
         WHEN balance.account_number IS NOT NULL THEN deposit_account.account_number
     END) AS num_deposit_accounts
-FROM {{ ref('bronze_deposit_account') }} AS deposit_account
+FROM {{ ref('silver_deposit_account') }} AS deposit_account
 LEFT JOIN {{ ref('silver_fact_tien_gui_asof') }} AS balance
     ON deposit_account.account_number = balance.account_number
 GROUP BY deposit_account.customer_id

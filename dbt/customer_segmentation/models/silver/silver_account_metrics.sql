@@ -5,7 +5,7 @@ WITH account_status_base AS (
         customer_id,
         CONCAT('DEP|', account_number) AS account_key,
         account_close_date
-    FROM {{ ref('bronze_deposit_account') }}
+    FROM {{ ref('silver_deposit_account') }}
 
     UNION ALL
 
@@ -13,7 +13,7 @@ WITH account_status_base AS (
         customer_id,
         CONCAT('LOAN|', account_number) AS account_key,
         account_close_date
-    FROM {{ ref('bronze_loan_account') }}
+    FROM {{ ref('silver_loan_account') }}
 ),
 
 as_of AS (

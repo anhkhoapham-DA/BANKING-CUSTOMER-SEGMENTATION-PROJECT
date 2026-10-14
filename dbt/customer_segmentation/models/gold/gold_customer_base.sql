@@ -2,16 +2,16 @@
 
 WITH base AS (
     SELECT
-        kh.customer_id AS CIF,
-        kh.customer_name AS ten_khach_hang,
-        kh.segment_id AS ma_phan_khuc,
-        kh.segment_name AS ten_phan_khuc,
-        kh.segment_type AS loai_phan_khuc,
-        kh.customer_type AS phan_loai,
-        kh.district_name AS ten_quan,
-        kh.age_group AS nhom_tuoi,
-        kh.occupation AS nghe_nghiep,
-        kh.customer_status AS trang_thai,
+        kh.customer_id,
+        kh.customer_name,
+        kh.segment_id,
+        kh.segment_name,
+        kh.segment_type,
+        kh.customer_type, 
+        kh.district_name,
+        kh.age_group,
+        kh.occupation, 
+        kh.customer_status,
         kh.risk_score,
 
         COALESCE(dm.current_deposit_balance, 0)  AS current_deposit_balance,
