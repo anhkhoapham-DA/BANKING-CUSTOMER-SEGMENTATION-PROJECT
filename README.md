@@ -62,7 +62,6 @@ customer_segmentation/
 └── analysis/
 │   └── risk_score_eda.ipynb              # EDA: legacy risk score vs actual debt group
 ├──snapshots
-│
 ├──tests
 ```
 ## 📊 Dashboard Overview & Key Insights
