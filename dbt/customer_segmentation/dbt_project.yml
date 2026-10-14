@@ -19,13 +19,13 @@ models:
     +materialized: view
     bronze:
       +docs:
-        node_color: "#b87333"   # đồng
+        node_color: "#b87333"
     silver:
       +docs:
-        node_color: "#6b7a8f"   # xám xanh
+        node_color: "#6b7a8f"
     gold:
       +docs:
-        node_color: "#c9a227"   # vàng
+        node_color: "#c9a227"
 
 seeds:
   customer_segmentation:
