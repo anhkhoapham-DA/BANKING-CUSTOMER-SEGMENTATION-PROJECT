@@ -6,7 +6,7 @@ A comprehensive Power BI solution for banking customer segmentation, combining S
 
 ## Business Objective
 In the retail and corporate banking sector, understanding customer behavior and lifecycle stages is critical. This dashboard addresses key business needs by:
-* **Holistic Portfolio Management:** Providing a macro-view of customer distribution across 19 lifecycle and risk segments.
+* **Holistic Portfolio Management:** Providing a macro-view of customer distribution across 20 final segments.
 * **Proactive Risk Mitigation:** Tracking at-risk accounts, monitoring debt groups, and forecasting NPL (Non-Performing Loan) provisioning needs.
 * **Targeted Customer Care:** Empowering Relationship Managers (RMs) with data-driven triggers for Cross-Selling, Retention, and Activation.
 
