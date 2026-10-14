@@ -60,7 +60,7 @@ customer_segmentation/
 ├── seeds/
 │   └── product_mapping.csv               # Product mapping reference (115 products)
 └── analysis/
-    └── risk_score_eda.ipynb              # EDA: legacy risk score vs actual debt group
+│   └── risk_score_eda.ipynb              # EDA: legacy risk score vs actual debt group
 │
 ├──snapshots
 │
