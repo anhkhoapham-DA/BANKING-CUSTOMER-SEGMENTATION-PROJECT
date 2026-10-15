@@ -89,7 +89,7 @@ Landing page introducing the four report sections with a consistent. Features cl
 ### 3. Customer 360
 Portfolio-level overview of the entire customer base tracking total customers, balances, and macro-trends.
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
-* **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (24.01%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
+* **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (26.61%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
 <img width="1441" height="808" alt="Ảnh chụp màn hình 2026-10-13 130931" src="https://github.com/user-attachments/assets/128ed697-8814-4f18-b3e4-64061ea63564" />
 
@@ -103,7 +103,7 @@ A full 360° view of a single selected customer (searchable by CIF & Name) desig
 ### 5. Customer Risk Management
 Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
-* **💡 Snapshot Insight:** A massive **73.03%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
+* **💡 Snapshot Insight:** A massive **72.02%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"KHDN LỚN" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 * 
 <img width="1441" height="806" alt="image" src="https://github.com/user-attachments/assets/f35397cc-cc84-4a61-bbd3-4d41b9e1922f" />
 
@@ -115,13 +115,13 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
 
 * **Tab 1: Customer Expansion**
   * **Key Features:** Interactive Cross-Sell Matrix mapping row-product vs. column-product ownership.
-  * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between mixed real estate loans and corporate real estate projects), leaving vast white space for broader retail expansion campaigns.
+  * **💡 Snapshot Insight:** The matrix reveals highly siloed product ownership. Cross-selling success is currently concentrated in specific niches (e.g., 100% overlap between document discounting and corporate business loan), leaving vast white space for broader retail expansion campaigns.
 
 <img width="1240" height="694" alt="Ảnh chụp màn hình 2026-10-14 203841" src="https://github.com/user-attachments/assets/bf410954-f9f3-4fd0-a2e7-98f212d70f2b" />
 
 * **Tab 2: Customer Retention**
   * **Key Features:** Horizontal bar chart ranking customers by balance decline %, alongside a dynamic account maturity tracker.
-  * **💡 Snapshot Insight:** Highlights immediate churn risks by pinpointing high-value accounts experiencing sharp balance drops (up to **-11.76%** in deposits). RMs can cross-reference this with impending maturity dates (e.g., spikes in July/August 2026) to intervene preemptively.
+  * **💡 Snapshot Insight:** Highlights immediate churn risks by pinpointing high-value accounts experiencing sharp balance drops (up to **-6.59%** in deposits and **-8.64%** in loans). RMs can cross-reference this with impending maturity dates (e.g., spikes in July/August 2026) to intervene preemptively.
 
 <img width="1439" height="807" alt="image" src="https://github.com/user-attachments/assets/0a8a1681-def5-4ec4-8a88-052bebec19ba" />
 
@@ -129,7 +129,7 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
 
 * **Tab 3: Customer Activation**
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
-  * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department (Phòng Bán lẻ)** bearing the brunt of the backlog (596 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
+  * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department** bearing the brunt of the backlog (666 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
   * 
 <img width="1442" height="806" alt="image" src="https://github.com/user-attachments/assets/25db21e9-fe15-4eea-a470-58d163998bcd" />
 
