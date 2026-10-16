@@ -1,1 +1,0 @@
-{"nodes": [{"id": "$graphify-root$_dbt_customer_segmentation_models_gold_gold_customer_sub_segments_sql", "label": "gold_customer_sub_segments.sql", "file_type": "code", "source_file": "dbt/customer_segmentation/models/gold/gold_customer_sub_segments.sql", "source_location": null}], "edges": []}

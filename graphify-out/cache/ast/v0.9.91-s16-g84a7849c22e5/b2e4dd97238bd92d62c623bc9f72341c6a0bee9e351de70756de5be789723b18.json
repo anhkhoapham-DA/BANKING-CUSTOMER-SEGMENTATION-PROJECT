@@ -1,1 +1,0 @@
-{"nodes": [{"id": "$graphify-root$_dbt_customer_segmentation_macros_translate_term_type_sql", "label": "translate_term_type.sql", "file_type": "code", "source_file": "dbt/customer_segmentation/macros/translate_term_type.sql", "source_location": null}], "edges": []}

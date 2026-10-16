@@ -1,1 +1,0 @@
-{"nodes": [{"id": "$graphify-root$_dbt_customer_segmentation_models_gold_gold_cross_sell_matrix_sql", "label": "gold_cross_sell_matrix.sql", "file_type": "code", "source_file": "dbt/customer_segmentation/models/gold/gold_cross_sell_matrix.sql", "source_location": null}], "edges": []}

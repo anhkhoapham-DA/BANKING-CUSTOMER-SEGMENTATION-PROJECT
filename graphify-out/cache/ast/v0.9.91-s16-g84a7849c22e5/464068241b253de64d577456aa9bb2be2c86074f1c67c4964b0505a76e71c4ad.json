@@ -1,1 +1,0 @@
-{"nodes": [{"id": "$graphify-root$_dbt_customer_segmentation_models_bronze_bronze_loan_account_sql", "label": "bronze_loan_account.sql", "file_type": "code", "source_file": "dbt/customer_segmentation/models/bronze/bronze_loan_account.sql", "source_location": null}], "edges": []}
