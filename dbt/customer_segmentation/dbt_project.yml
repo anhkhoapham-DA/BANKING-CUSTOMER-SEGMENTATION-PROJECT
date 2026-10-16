@@ -16,14 +16,16 @@ clean-targets:
 
 models:
   customer_segmentation:
-    +materialized: view
     bronze:
+      +materialized: view
       +docs:
         node_color: "#b87333"
     silver:
+      +materialized: view
       +docs:
         node_color: "#6b7a8f"
     gold:
+      +materialized: table
       +docs:
         node_color: "#c9a227"
 

@@ -122,31 +122,40 @@ models:
 
   - name: gold_customer_base
     columns:
-      - name: CIF
+      - name: customer_id
         data_tests:
           - not_null
           - unique
 
-  - name: gold_customer_final_segmentation
-    columns:
-      - name: CIF
-        data_tests:
-          - not_null
-          - unique
-
-  - name: gold_customer_segmentation
+  - name: gold_customer_sub_segments
     columns:
       - name: customer_id
         data_tests:
           - not_null
           - unique
 
-  - name: gold_customer_segments
+  - name: gold_customer_final_segmentation
     columns:
-      - name: CIF
+      - name: customer_id
         data_tests:
           - not_null
           - unique
+
+  - name: gold_customer_360
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: gold_cross_sell_matrix
+    columns:
+      - name: product_a
+        data_tests:
+          - not_null
+      - name: product_b
+        data_tests:
+          - not_null
 
 seeds:
   - name: product_mapping
