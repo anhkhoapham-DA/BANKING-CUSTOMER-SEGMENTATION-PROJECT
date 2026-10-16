@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_dbt_customer_segmentation_models_silver_silver_department_sql", "label": "silver_department.sql", "file_type": "code", "source_file": "dbt/customer_segmentation/models/silver/silver_department.sql", "source_location": null}], "edges": []}

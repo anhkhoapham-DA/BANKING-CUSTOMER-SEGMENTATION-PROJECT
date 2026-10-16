@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BANKING-CUSTOMER-SEGMENTATION-PROJECT — Complete Call Flow &amp; Architecture Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --border: #334155;
+  --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8;
+  --warn: #fbbf24; --err: #f87171; --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 2.4rem; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 1.7rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.25rem; margin: 32px 0 12px; color: var(--accent); }
+h4 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--warn); }
+p { margin: 8px 0; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+.mermaid { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; overflow-x: auto; position: relative; }
+.mermaid.is-enhanced { padding: 0; overflow: hidden; min-height: 260px; }
+.mermaid-viewport { padding: 54px 24px 24px; overflow: hidden; cursor: grab; touch-action: none; min-height: 260px; }
+.mermaid-viewport.is-dragging { cursor: grabbing; }
+.mermaid-viewport svg { max-width: none !important; height: auto; transform-origin: 0 0; transition: transform 120ms ease; }
+.mermaid-toolbar { position: absolute; top: 10px; right: 10px; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 6px; background: rgba(15,23,42,0.92); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.mermaid-toolbar button, .mermaid-toolbar .zoom-level { height: 28px; min-width: 32px; border: 1px solid var(--border); border-radius: 6px; background: #1e293b; color: var(--text); font: 600 0.78rem system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+.mermaid-toolbar button { cursor: pointer; }
+.mermaid-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+.mermaid-toolbar .zoom-level { min-width: 52px; color: var(--muted); background: transparent; }
+.call-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; }
+.call-table th { background: #1a2744; color: var(--accent); text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+.call-table td { padding: 8px 14px; border: 1px solid var(--border); vertical-align: top; }
+.call-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-async { background: #7c3aed33; color: #a78bfa; }
+.tag-class { background: #05966933; color: var(--ok); }
+.tag-func { background: #2563eb33; color: var(--accent); }
+.tag-cmd { background: #d9770633; color: var(--warn); }
+.tag-endpoint { background: #dc262633; color: var(--err); }
+.tag-hook { background: #db277733; color: #f472b6; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 16px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin: 16px 0; }
+.arrow-chain { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent); padding: 10px; background: rgba(56,189,248,0.06); border-radius: 6px; }
+code { font-family: 'Fira Code', 'Cascadia Code', monospace; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+ul, ol { margin: 8px 0 8px 24px; color: var(--muted); }
+li { margin: 4px 0; }
+a { color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.nav { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) { .container { padding: 16px; } h1 { font-size: 1.8rem; } }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>BANKING-CUSTOMER-SEGMENTATION-PROJECT — Complete Call Flow &amp; Architecture Documentation</h1>
+<p class="subtitle">Generated from graphify knowledge graph: 34 nodes, 0 edges, 34 communities. Commit: b8c20fa</p>
+
+<div class="nav">
+    <a href="#overview">Architecture Overview</a>
+    <a href="#translate-term-typesql">Translate Term Typesql</a>
+    <a href="#bronze-customersql-dbt">Bronze Customersql Dbt</a>
+    <a href="#bronze-staffsql-dbt">Bronze Staffsql Dbt</a>
+    <a href="#gold-cross-sell">Gold Cross Sell</a>
+    <a href="#gold-customer-360sql">Gold Customer 360Sql</a>
+    <a href="#gold-customer-basesql">Gold Customer Basesql</a>
+    <a href="#gold-customer-final">Gold Customer Final</a>
+    <a href="#gold-customer-sub">Gold Customer Sub</a>
+    <a href="#silver-account-metricssql">Silver Account Metricssql</a>
+    <a href="#silver-datesql-dbt">Silver Datesql Dbt</a>
+    <a href="#silver-customersql-dbt">Silver Customersql Dbt</a>
+    <a href="#silver-customer-segmentsql">Silver Customer Segmentsql</a>
+    <a href="#bronze-customer-segmentsql">Bronze Customer Segmentsql</a>
+    <a href="#silver-departmentsql-dbt">Silver Departmentsql Dbt</a>
+    <a href="#other">Other</a>
+</div>
+
+<!-- ====== Architecture Overview ====== -->
+<h2 id="overview">1. Architecture Overview</h2>
+
+<div class="mermaid">
+
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    TRANSLATE_TERM_TYPESQL_34D0BC09("Translate Term Typesql<br/><small>1 nodes</small>")
+    class TRANSLATE_TERM_TYPESQL_34D0BC09 module;
+    BRONZE_CUSTOMERSQL_DBT_E5FA07DA("Bronze Customersql Dbt<br/><small>1 nodes</small>")
+    class BRONZE_CUSTOMERSQL_DBT_E5FA07DA module;
+    BRONZE_STAFFSQL_DBT_8219DCAE("Bronze Staffsql Dbt<br/><small>1 nodes</small>")
+    class BRONZE_STAFFSQL_DBT_8219DCAE module;
+    GOLD_CROSS_SELL_B80380F6("Gold Cross Sell<br/><small>1 nodes</small>")
+    class GOLD_CROSS_SELL_B80380F6 module;
+    GOLD_CUSTOMER_360SQL_72A823DC("Gold Customer 360Sql<br/><small>1 nodes</small>")
+    class GOLD_CUSTOMER_360SQL_72A823DC module;
+    GOLD_CUSTOMER_BASESQL_5388E28F("Gold Customer Basesql<br/><small>1 nodes</small>")
+    class GOLD_CUSTOMER_BASESQL_5388E28F module;
+    GOLD_CUSTOMER_FINAL_E1C4CC1A("Gold Customer Final<br/><small>1 nodes</small>")
+    class GOLD_CUSTOMER_FINAL_E1C4CC1A module;
+    GOLD_CUSTOMER_SUB_560DBB8E("Gold Customer Sub<br/><small>1 nodes</small>")
+    class GOLD_CUSTOMER_SUB_560DBB8E module;
+    SILVER_ACCOUNT_METRICSSQL_2430C797("Silver Account Metricssql<br/><small>1 nodes</small>")
+    class SILVER_ACCOUNT_METRICSSQL_2430C797 module;
+    SILVER_DATESQL_DBT_012AE63E("Silver Datesql Dbt<br/><small>1 nodes</small>")
+    class SILVER_DATESQL_DBT_012AE63E module;
+    SILVER_CUSTOMERSQL_DBT_E7E89E28("Silver Customersql Dbt<br/><small>1 nodes</small>")
+    class SILVER_CUSTOMERSQL_DBT_E7E89E28 module;
+    SILVER_CUSTOMER_SEGMENTSQL_4AF95C2A("Silver Customer Segmentsql<br/><small>1 nodes</small>")
+    class SILVER_CUSTOMER_SEGMENTSQL_4AF95C2A module;
+    BRONZE_CUSTOMER_SEGMENTSQL_E40F5CF5("Bronze Customer Segmentsql<br/><small>1 nodes</small>")
+    class BRONZE_CUSTOMER_SEGMENTSQL_E40F5CF5 module;
+    SILVER_DEPARTMENTSQL_DBT_7627D1AF("Silver Departmentsql Dbt<br/><small>1 nodes</small>")
+    class SILVER_DEPARTMENTSQL_DBT_7627D1AF module;
+    OTHER_D0941E68("Other<br/><small>20 nodes</small>")
+    class OTHER_D0941E68 module;
+    TRANSLATE_TERM_TYPESQL_34D0BC09 -.-> BRONZE_CUSTOMERSQL_DBT_E5FA07DA
+    BRONZE_CUSTOMERSQL_DBT_E5FA07DA -.-> BRONZE_STAFFSQL_DBT_8219DCAE
+    BRONZE_STAFFSQL_DBT_8219DCAE -.-> GOLD_CROSS_SELL_B80380F6
+    GOLD_CROSS_SELL_B80380F6 -.-> GOLD_CUSTOMER_360SQL_72A823DC
+    GOLD_CUSTOMER_360SQL_72A823DC -.-> GOLD_CUSTOMER_BASESQL_5388E28F
+    GOLD_CUSTOMER_BASESQL_5388E28F -.-> GOLD_CUSTOMER_FINAL_E1C4CC1A
+    GOLD_CUSTOMER_FINAL_E1C4CC1A -.-> GOLD_CUSTOMER_SUB_560DBB8E
+    GOLD_CUSTOMER_SUB_560DBB8E -.-> SILVER_ACCOUNT_METRICSSQL_2430C797
+    SILVER_ACCOUNT_METRICSSQL_2430C797 -.-> SILVER_DATESQL_DBT_012AE63E
+    SILVER_DATESQL_DBT_012AE63E -.-> SILVER_CUSTOMERSQL_DBT_E7E89E28
+    SILVER_CUSTOMERSQL_DBT_E7E89E28 -.-> SILVER_CUSTOMER_SEGMENTSQL_4AF95C2A
+    SILVER_CUSTOMER_SEGMENTSQL_4AF95C2A -.-> BRONZE_CUSTOMER_SEGMENTSQL_E40F5CF5
+    BRONZE_CUSTOMER_SEGMENTSQL_E40F5CF5 -.-> SILVER_DEPARTMENTSQL_DBT_7627D1AF
+    SILVER_DEPARTMENTSQL_DBT_7627D1AF -.-> OTHER_D0941E68
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h4>Architecture Layers</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
+      <tr><td>Translate Term Typesql</td><td>1</td><td><code>0</code></td></tr><tr><td>Bronze Customersql Dbt</td><td>1</td><td><code>1</code></td></tr><tr><td>Bronze Staffsql Dbt</td><td>1</td><td><code>10</code></td></tr><tr><td>Gold Cross Sell</td><td>1</td><td><code>11</code></td></tr><tr><td>Gold Customer 360Sql</td><td>1</td><td><code>12</code></td></tr><tr><td>Gold Customer Basesql</td><td>1</td><td><code>13</code></td></tr><tr><td>Gold Customer Final</td><td>1</td><td><code>14</code></td></tr><tr><td>Gold Customer Sub</td><td>1</td><td><code>15</code></td></tr><tr><td>Silver Account Metricssql</td><td>1</td><td><code>16</code></td></tr><tr><td>Silver Datesql Dbt</td><td>1</td><td><code>17</code></td></tr><tr><td>Silver Customersql Dbt</td><td>1</td><td><code>18</code></td></tr><tr><td>Silver Customer Segmentsql</td><td>1</td><td><code>19</code></td></tr><tr><td>Bronze Customer Segmentsql</td><td>1</td><td><code>2</code></td></tr><tr><td>Silver Departmentsql Dbt</td><td>1</td><td><code>20</code></td></tr><tr><td>Other</td><td>20</td><td><code>21, 22, 23, 24, 25, 26, 27, 28, 29, 3, 30, 31, 32, 33, 4, 5, 6, 7, 8, 9</code></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Core Flow</h4>
+    <div class="arrow-chain">Translate Term Typesql -&gt; Bronze Customersql Dbt -&gt; Bronze Staffsql Dbt -&gt; Gold Cross Sell -&gt; Gold Customer 360Sql -&gt; Gold Customer Basesql -&gt; Gold Customer Final</div>
+  </div>
+</div>
+<hr>
+<!-- ====== 2. Translate Term Typesql ====== -->
+<h2 id="translate-term-typesql">2. Translate Term Typesql</h2>
+<p>Translate Term Typesql groups implementation around translate, term, typesql, dbt, mostly in customer_segmentation/macros/translate_term_type.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Translate Term Typesql (1 nodes, 0 edges)
+    dbt_customer_segmentation_macros_translate_term_c1da0892("translate_term_type.sql")
+    class dbt_customer_segmentation_macros_translate_term_c1da0892 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>translate_term_type.sql</code><br><small style="color:var(--muted)">customer_segmentation/macros/translate_term_type.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>translate_term_type.sql node in customer_segmentation/macros/translate_term_type.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>customer_segmentation/macros/translate_term_type.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 3. Bronze Customersql Dbt ====== -->
+<h2 id="bronze-customersql-dbt">3. Bronze Customersql Dbt</h2>
+<p>Bronze Customersql Dbt groups implementation around bronze, customersql, dbt, customer, mostly in models/bronze/bronze_customer.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Bronze Customersql Dbt (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_bronze_bronze_c_1f286f62("bronze_customer.sql")
+    class dbt_customer_segmentation_models_bronze_bronze_c_1f286f62 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>bronze_customer.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_customer.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_customer.sql node in models/bronze/bronze_customer.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/bronze/bronze_customer.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 4. Bronze Staffsql Dbt ====== -->
+<h2 id="bronze-staffsql-dbt">4. Bronze Staffsql Dbt</h2>
+<p>Bronze Staffsql Dbt groups implementation around bronze, staffsql, dbt, customer, mostly in models/bronze/bronze_staff.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Bronze Staffsql Dbt (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_bronze_bronze_s_143cb5c0("bronze_staff.sql")
+    class dbt_customer_segmentation_models_bronze_bronze_s_143cb5c0 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>bronze_staff.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_staff.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_staff.sql node in models/bronze/bronze_staff.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/bronze/bronze_staff.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 5. Gold Cross Sell ====== -->
+<h2 id="gold-cross-sell">5. Gold Cross Sell</h2>
+<p>Gold Cross Sell groups implementation around gold, cross, sell, matrixsql, mostly in models/gold/gold_cross_sell_matrix.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Gold Cross Sell (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_gold_gold_cross_90571e6d("gold_cross_sell_matrix.sql")
+    class dbt_customer_segmentation_models_gold_gold_cross_90571e6d function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>gold_cross_sell_matrix.sql</code><br><small style="color:var(--muted)">models/gold/gold_cross_sell_matrix.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>gold_cross_sell_matrix.sql node in models/gold/gold_cross_sell_matrix.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/gold/gold_cross_sell_matrix.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 6. Gold Customer 360Sql ====== -->
+<h2 id="gold-customer-360sql">6. Gold Customer 360Sql</h2>
+<p>Gold Customer 360Sql groups implementation around gold, customer, 360sql, dbt, mostly in models/gold/gold_customer_360.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Gold Customer 360Sql (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_gold_gold_custo_b05c0a73("gold_customer_360.sql")
+    class dbt_customer_segmentation_models_gold_gold_custo_b05c0a73 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>gold_customer_360.sql</code><br><small style="color:var(--muted)">models/gold/gold_customer_360.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>gold_customer_360.sql node in models/gold/gold_customer_360.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/gold/gold_customer_360.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 7. Gold Customer Basesql ====== -->
+<h2 id="gold-customer-basesql">7. Gold Customer Basesql</h2>
+<p>Gold Customer Basesql groups implementation around gold, customer, basesql, dbt, mostly in models/gold/gold_customer_base.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Gold Customer Basesql (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_gold_gold_custo_39ea5317("gold_customer_base.sql")
+    class dbt_customer_segmentation_models_gold_gold_custo_39ea5317 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>gold_customer_base.sql</code><br><small style="color:var(--muted)">models/gold/gold_customer_base.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>gold_customer_base.sql node in models/gold/gold_customer_base.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/gold/gold_customer_base.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 8. Gold Customer Final ====== -->
+<h2 id="gold-customer-final">8. Gold Customer Final</h2>
+<p>Gold Customer Final groups implementation around gold, customer, final, segmentationsql, mostly in models/gold/gold_customer_final_segmentation.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Gold Customer Final (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_gold_gold_custo_d44fb3f4("customer final segmentation.sql<br/><small>models/gold/gold_customer_final_segmentation.sql</small>")
+    class dbt_customer_segmentation_models_gold_gold_custo_d44fb3f4 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>gold_customer_final_segmentation.sql</code><br><small style="color:var(--muted)">models/gold/gold_customer_final_segmentation.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>gold_customer_final_segmentation.sql node in models/gold/gold_customer_final_segmentation.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/gold/gold_customer_final_segmentation.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 9. Gold Customer Sub ====== -->
+<h2 id="gold-customer-sub">9. Gold Customer Sub</h2>
+<p>Gold Customer Sub groups implementation around gold, customer, sub, segmentssql, mostly in models/gold/gold_customer_sub_segments.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Gold Customer Sub (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_gold_gold_custo_14a95a19("customer sub segments.sql<br/><small>models/gold/gold_customer_sub_segments.sql</small>")
+    class dbt_customer_segmentation_models_gold_gold_custo_14a95a19 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>gold_customer_sub_segments.sql</code><br><small style="color:var(--muted)">models/gold/gold_customer_sub_segments.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>gold_customer_sub_segments.sql node in models/gold/gold_customer_sub_segments.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/gold/gold_customer_sub_segments.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 10. Silver Account Metricssql ====== -->
+<h2 id="silver-account-metricssql">10. Silver Account Metricssql</h2>
+<p>Silver Account Metricssql groups implementation around silver, account, metricssql, dbt, mostly in models/silver/silver_account_metrics.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Silver Account Metricssql (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_silver_silver_a_180356f4("silver_account_metrics.sql")
+    class dbt_customer_segmentation_models_silver_silver_a_180356f4 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_account_metrics.sql</code><br><small style="color:var(--muted)">models/silver/silver_account_metrics.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_account_metrics.sql node in models/silver/silver_account_metrics.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/silver/silver_account_metrics.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 11. Silver Datesql Dbt ====== -->
+<h2 id="silver-datesql-dbt">11. Silver Datesql Dbt</h2>
+<p>Silver Datesql Dbt groups implementation around silver, datesql, dbt, customer, mostly in models/silver/silver_as_of_date.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Silver Datesql Dbt (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_silver_silver_a_f64a7bed("silver_as_of_date.sql")
+    class dbt_customer_segmentation_models_silver_silver_a_f64a7bed function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_as_of_date.sql</code><br><small style="color:var(--muted)">models/silver/silver_as_of_date.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_as_of_date.sql node in models/silver/silver_as_of_date.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/silver/silver_as_of_date.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 12. Silver Customersql Dbt ====== -->
+<h2 id="silver-customersql-dbt">12. Silver Customersql Dbt</h2>
+<p>Silver Customersql Dbt groups implementation around silver, customersql, dbt, customer, mostly in models/silver/silver_customer.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Silver Customersql Dbt (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_silver_silver_c_233f95b7("silver_customer.sql")
+    class dbt_customer_segmentation_models_silver_silver_c_233f95b7 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_customer.sql</code><br><small style="color:var(--muted)">models/silver/silver_customer.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_customer.sql node in models/silver/silver_customer.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/silver/silver_customer.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 13. Silver Customer Segmentsql ====== -->
+<h2 id="silver-customer-segmentsql">13. Silver Customer Segmentsql</h2>
+<p>Silver Customer Segmentsql groups implementation around silver, customer, segmentsql, dbt, mostly in models/silver/silver_customer_segment.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Silver Customer Segmentsql (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_silver_silver_c_2d2397d8("silver_customer_segment.sql")
+    class dbt_customer_segmentation_models_silver_silver_c_2d2397d8 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_customer_segment.sql</code><br><small style="color:var(--muted)">models/silver/silver_customer_segment.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_customer_segment.sql node in models/silver/silver_customer_segment.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/silver/silver_customer_segment.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 14. Bronze Customer Segmentsql ====== -->
+<h2 id="bronze-customer-segmentsql">14. Bronze Customer Segmentsql</h2>
+<p>Bronze Customer Segmentsql groups implementation around bronze, customer, segmentsql, dbt, mostly in models/bronze/bronze_customer_segment.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Bronze Customer Segmentsql (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_bronze_bronze_c_035a6a9b("bronze_customer_segment.sql")
+    class dbt_customer_segmentation_models_bronze_bronze_c_035a6a9b function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>bronze_customer_segment.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_customer_segment.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_customer_segment.sql node in models/bronze/bronze_customer_segment.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/bronze/bronze_customer_segment.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 15. Silver Departmentsql Dbt ====== -->
+<h2 id="silver-departmentsql-dbt">15. Silver Departmentsql Dbt</h2>
+<p>Silver Departmentsql Dbt groups implementation around silver, departmentsql, dbt, customer, mostly in models/silver/silver_department.sql. This section covers 1 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Silver Departmentsql Dbt (1 nodes, 0 edges)
+    dbt_customer_segmentation_models_silver_silver_d_1a4e9582("silver_department.sql")
+    class dbt_customer_segmentation_models_silver_silver_d_1a4e9582 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_department.sql</code><br><small style="color:var(--muted)">models/silver/silver_department.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_department.sql node in models/silver/silver_department.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/silver/silver_department.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 16. Other ====== -->
+<h2 id="other">16. Other</h2>
+<p>Other groups implementation around silver, bronze, dbt, customer, mostly in models/silver/silver_deposit_account.sql, models/silver/silver_deposit_balance.sql, models/silver/silver_deposit_metrics.sql. This section covers 20 nodes and 0 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Other (20 nodes, 0 edges)
+    dbt_customer_segmentation_models_bronze_bronze_d_88aea858("bronze_department.sql")
+    dbt_customer_segmentation_models_bronze_bronze_d_b4cadd2f("bronze_deposit_account.sql")
+    dbt_customer_segmentation_models_bronze_bronze_d_333f3f68("bronze_deposit_balance.sql")
+    dbt_customer_segmentation_models_bronze_bronze_l_671ed405("bronze_loan_account.sql")
+    dbt_customer_segmentation_models_bronze_bronze_l_440e6be4("bronze_loan_balance.sql")
+    dbt_customer_segmentation_models_bronze_bronze_p_3e966024("bronze_product.sql")
+    dbt_customer_segmentation_models_bronze_bronze_r_64becc32("bronze_region.sql")
+    dbt_customer_segmentation_models_silver_silver_d_121160c7("silver_deposit_account.sql")
+    dbt_customer_segmentation_models_silver_silver_d_fd1ba1ab("silver_deposit_balance.sql")
+    dbt_customer_segmentation_models_silver_silver_d_e513c9b7("silver_deposit_metrics.sql")
+    dbt_customer_segmentation_models_silver_silver_f_38eb07ae("silver_fact_du_no_asof.sql")
+    dbt_customer_segmentation_models_silver_silver_f_eae15615("tien gui asof.sql<br/><small>models/silver/silver_fact_tien_gui_asof.sql</small>")
+    dbt_customer_segmentation_models_silver_silver_l_217a2c9f("silver_loan_account.sql")
+    dbt_customer_segmentation_models_silver_silver_l_2a77fefb("silver_loan_balance.sql")
+    dbt_customer_segmentation_models_silver_silver_l_d180b6d9("silver_loan_metrics.sql")
+    dbt_customer_segmentation_models_silver_silver_p_d22366dd("silver_product.sql")
+    dbt_customer_segmentation_models_silver_silver_p_b1eefcfd("silver_product_metrics.sql")
+    dbt_customer_segmentation_models_silver_silver_r_687addfc("silver_region.sql")
+    %% Omitted for readability: 2 nodes, 0 edges
+    class dbt_customer_segmentation_models_bronze_bronze_d_88aea858 function;
+    class dbt_customer_segmentation_models_bronze_bronze_d_b4cadd2f function;
+    class dbt_customer_segmentation_models_bronze_bronze_d_333f3f68 function;
+    class dbt_customer_segmentation_models_bronze_bronze_l_671ed405 function;
+    class dbt_customer_segmentation_models_bronze_bronze_l_440e6be4 function;
+    class dbt_customer_segmentation_models_bronze_bronze_p_3e966024 function;
+    class dbt_customer_segmentation_models_bronze_bronze_r_64becc32 function;
+    class dbt_customer_segmentation_models_silver_silver_d_121160c7 function;
+    class dbt_customer_segmentation_models_silver_silver_d_fd1ba1ab function;
+    class dbt_customer_segmentation_models_silver_silver_d_e513c9b7 function;
+    class dbt_customer_segmentation_models_silver_silver_f_38eb07ae function;
+    class dbt_customer_segmentation_models_silver_silver_f_eae15615 function;
+    class dbt_customer_segmentation_models_silver_silver_l_217a2c9f function;
+    class dbt_customer_segmentation_models_silver_silver_l_2a77fefb function;
+    class dbt_customer_segmentation_models_silver_silver_l_d180b6d9 function;
+    class dbt_customer_segmentation_models_silver_silver_p_d22366dd function;
+    class dbt_customer_segmentation_models_silver_silver_p_b1eefcfd function;
+    class dbt_customer_segmentation_models_silver_silver_r_687addfc function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>silver_deposit_account.sql</code><br><small style="color:var(--muted)">models/silver/silver_deposit_account.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_deposit_account.sql node in models/silver/silver_deposit_account.sql.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>silver_deposit_balance.sql</code><br><small style="color:var(--muted)">models/silver/silver_deposit_balance.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_deposit_balance.sql node in models/silver/silver_deposit_balance.sql.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>silver_deposit_metrics.sql</code><br><small style="color:var(--muted)">models/silver/silver_deposit_metrics.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_deposit_metrics.sql node in models/silver/silver_deposit_metrics.sql.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>silver_fact_du_no_asof.sql</code><br><small style="color:var(--muted)">models/silver/silver_fact_du_no_asof.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_fact_du_no_asof.sql node in models/silver/silver_fact_du_no_asof.sql.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>silver_fact_tien_gui_asof.sql</code><br><small style="color:var(--muted)">models/silver/silver_fact_tien_gui_asof.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_fact_tien_gui_asof.sql node in models/silver/silver_fact_tien_gui_asof.sql.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>silver_loan_account.sql</code><br><small style="color:var(--muted)">models/silver/silver_loan_account.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_loan_account.sql node in models/silver/silver_loan_account.sql.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>silver_loan_balance.sql</code><br><small style="color:var(--muted)">models/silver/silver_loan_balance.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_loan_balance.sql node in models/silver/silver_loan_balance.sql.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>silver_loan_metrics.sql</code><br><small style="color:var(--muted)">models/silver/silver_loan_metrics.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_loan_metrics.sql node in models/silver/silver_loan_metrics.sql.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>silver_product.sql</code><br><small style="color:var(--muted)">models/silver/silver_product.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_product.sql node in models/silver/silver_product.sql.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>bronze_department.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_department.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_department.sql node in models/bronze/bronze_department.sql.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>silver_product_metrics.sql</code><br><small style="color:var(--muted)">models/silver/silver_product_metrics.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_product_metrics.sql node in models/silver/silver_product_metrics.sql.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>silver_region.sql</code><br><small style="color:var(--muted)">models/silver/silver_region.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_region.sql node in models/silver/silver_region.sql.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>silver_staff.sql</code><br><small style="color:var(--muted)">models/silver/silver_staff.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_staff.sql node in models/silver/silver_staff.sql.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>silver_tenure_metrics.sql</code><br><small style="color:var(--muted)">models/silver/silver_tenure_metrics.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>silver_tenure_metrics.sql node in models/silver/silver_tenure_metrics.sql.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>bronze_deposit_account.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_deposit_account.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_deposit_account.sql node in models/bronze/bronze_deposit_account.sql.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>bronze_deposit_balance.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_deposit_balance.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_deposit_balance.sql node in models/bronze/bronze_deposit_balance.sql.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>bronze_loan_account.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_loan_account.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_loan_account.sql node in models/bronze/bronze_loan_account.sql.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>bronze_loan_balance.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_loan_balance.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_loan_balance.sql node in models/bronze/bronze_loan_balance.sql.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>bronze_product.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_product.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_product.sql node in models/bronze/bronze_product.sql.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>bronze_region.sql</code><br><small style="color:var(--muted)">models/bronze/bronze_region.sql</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bronze_region.sql node in models/bronze/bronze_region.sql.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>models/bronze/bronze_department.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_deposit_account.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_deposit_balance.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_loan_account.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_loan_balance.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_product.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/bronze/bronze_region.sql</code></td><td>1 nodes</td></tr>
+<tr><td><code>models/silver/silver_deposit_account.sql</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: No high-confidence call edges detected. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<h2 id="stats">Project Statistics</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4>Graph</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>Nodes</td><td>34</td></tr>
+      <tr><td>Edges</td><td>0</td></tr>
+      <tr><td>Hyperedges</td><td>0</td></tr>
+      <tr><td>Communities</td><td>34</td></tr>
+      <tr><td>Documented Sections</td><td>15</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Edge Confidence</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>EXTRACTED</td><td>0</td></tr>
+      <tr><td>INFERRED</td><td>0</td></tr>
+      <tr><td>AMBIGUOUS</td><td>0</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
+  <p>BANKING-CUSTOMER-SEGMENTATION-PROJECT — Architecture Documentation</p>
+  <p>Generated: 2026-10-16 06:44 UTC · graphify callflow-html</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+(function () {
+  const mermaidConfig = {
+    startOnLoad: false,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true },
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#38bdf8',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#334155',
+      lineColor: '#64748b',
+      textColor: '#e2e8f0',
+    }
+  };
+
+  mermaid.initialize(mermaidConfig);
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function enhanceMermaidDiagrams() {
+    document.querySelectorAll('.mermaid').forEach((container) => {
+      if (container.dataset.zoomReady === 'true') return;
+      const svg = container.querySelector('svg');
+      if (!svg) return;
+
+      container.dataset.zoomReady = 'true';
+      container.classList.add('is-enhanced');
+
+      const viewport = document.createElement('div');
+      viewport.className = 'mermaid-viewport';
+      svg.parentNode.insertBefore(viewport, svg);
+      viewport.appendChild(svg);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'mermaid-toolbar';
+      toolbar.innerHTML = [
+        '<button type="button" data-action="zoom-out" title="Zoom out">-</button>',
+        '<span class="zoom-level" data-role="level">100%</span>',
+        '<button type="button" data-action="zoom-in" title="Zoom in">+</button>',
+        '<button type="button" data-action="fit" title="Fit width">Fit</button>',
+        '<button type="button" data-action="reset" title="Reset view">Reset</button>'
+      ].join('');
+      container.insertBefore(toolbar, viewport);
+
+      const state = { scale: 1, x: 0, y: 0, dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const level = toolbar.querySelector('[data-role="level"]');
+
+      function applyTransform() {
+        svg.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+        level.textContent = `${Math.round(state.scale * 100)}%`;
+      }
+
+      function zoomBy(delta) {
+        state.scale = clamp(state.scale + delta, 0.25, 3);
+        applyTransform();
+      }
+
+      function reset() {
+        state.scale = 1;
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      function fitWidth() {
+        const rawWidth = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width
+          ? svg.viewBox.baseVal.width
+          : svg.getBoundingClientRect().width / state.scale;
+        if (!rawWidth) {
+          reset();
+          return;
+        }
+        state.scale = clamp((viewport.clientWidth - 48) / rawWidth, 0.25, 1.4);
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      toolbar.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-action]');
+        if (!button) return;
+        const action = button.dataset.action;
+        if (action === 'zoom-in') zoomBy(0.15);
+        if (action === 'zoom-out') zoomBy(-0.15);
+        if (action === 'fit') fitWidth();
+        if (action === 'reset') reset();
+      });
+
+      viewport.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 0.1 : -0.1);
+      }, { passive: false });
+
+      viewport.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0) return;
+        state.dragging = true;
+        state.startX = event.clientX;
+        state.startY = event.clientY;
+        state.originX = state.x;
+        state.originY = state.y;
+        viewport.classList.add('is-dragging');
+        viewport.setPointerCapture(event.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (!state.dragging) return;
+        state.x = state.originX + event.clientX - state.startX;
+        state.y = state.originY + event.clientY - state.startY;
+        applyTransform();
+      });
+
+      function endDrag(event) {
+        if (!state.dragging) return;
+        state.dragging = false;
+        viewport.classList.remove('is-dragging');
+        if (viewport.hasPointerCapture(event.pointerId)) {
+          viewport.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+      applyTransform();
+    });
+  }
+
+  function renderMermaid() {
+    const result = mermaid.run
+      ? mermaid.run({ querySelector: '.mermaid' })
+      : Promise.resolve();
+    Promise.resolve(result)
+      .then(enhanceMermaidDiagrams)
+      .catch((error) => {
+        console.error('Mermaid render failed:', error);
+        enhanceMermaidDiagrams();
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaid);
+  } else {
+    renderMermaid();
+  }
+})();
+</script>
+
+</body>
+</html>
