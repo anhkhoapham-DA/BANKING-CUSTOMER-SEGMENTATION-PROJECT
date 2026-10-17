@@ -130,7 +130,7 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
 * **Tab 3: Customer Activation**
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
   * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department** bearing the brunt of the backlog (666 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
-  * 
+ 
 <img width="1442" height="806" alt="image" src="https://github.com/user-attachments/assets/25db21e9-fe15-4eea-a470-58d163998bcd" />
 
 ---
