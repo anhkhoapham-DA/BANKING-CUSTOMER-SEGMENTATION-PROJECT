@@ -79,8 +79,7 @@ customer_segmentation/
 <img width="1848" height="627" alt="image" src="https://github.com/user-attachments/assets/627c5803-fab5-464c-82bd-d0795ddcf388" />
 
 ### 1. Data Model 
-<img width="1315" height="787" alt="image" src="https://github.com/user-attachments/assets/763754bb-7c4d-45da-aa06-6d453bd1fd07" />
-
+c:\Users\anhkh\OneDrive\Pictures\Screenshots\Ảnh chụp màn hình 2026-10-19 160848.png
 ### 2. Cover Page
 Landing page introducing the four report sections with a consistent. Features clickable navigation cards for a seamless user experience.
 
