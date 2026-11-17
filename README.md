@@ -69,7 +69,7 @@ customer_segmentation/
 ├── seeds/
 │   └── product_mapping.csv               # Product mapping reference (115 products)
 └── analyses/
-│   └── risk_score_eda.ipynb              # EDA and find the cutoff based on actual debt group
+│   └── risk_score_eda.ipynb              # EDA and find the cutoff using Youden's J method
 ├──snapshots
 ├──tests
 ```
