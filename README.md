@@ -91,7 +91,7 @@ Portfolio-level overview of the entire customer base tracking total customers, b
 * **Key Features:** Total customers and balance KPIs, Final Customer Segment Distribution (19 segments), Dual-line trend chart for Loan vs. Deposit, and Product/Activity donut charts.
 * **💡 Snapshot Insight:** The portfolio shows a significant concentration of **Dormant Customers (26.61%)** and customers with **No Product (67.01%)**. Additionally, the macro trend highlights a shift from Q1-2025, where total deposits surged and stabilized above loan balances.
 
-<img width="1442" height="807" alt="Ảnh chụp màn hình 2026-11-17 133700" src="https://github.com/user-attachments/assets/1fd10baf-919d-4428-845b-4640972f3eef" />
+<img width="1244" height="698" alt="image" src="https://github.com/user-attachments/assets/8349de25-3778-4ea1-a339-649279fe3ce0" />
 
 ### 4. Customer Individual Profile
 A full 360° view of a single selected customer (searchable by CIF & Name) designed for Relationship Managers.
@@ -105,9 +105,9 @@ Monitoring and analysis of at-risk customers to support credit risk departments.
 * **Key Features:** At-risk KPIs (requiring NPL provision, with collateral), Worst Debt Group Trend, and a Box-and-Whisker plot for Risk Score Range by Segment.
 * **💡 Snapshot Insight:** A massive **72.02%** of at-risk customers fall into the "Potential Risk - No Product Relationship" bucket. The Box-and-Whisker plot clearly flags corporate segments, particularly **"Large Enterprise" (highlighted in red)**, as having a significantly skewed risk distribution compared to retail segments.
 
-<img width="1439" height="809" alt="image" src="https://github.com/user-attachments/assets/bace533b-39fe-458c-b764-7734b27f20e2" />
+<img width="1240" height="696" alt="image" src="https://github.com/user-attachments/assets/1f95fe79-41f6-4901-9766-ab8f654f0ba6" />
 
-<img width="1441" height="809" alt="image" src="https://github.com/user-attachments/assets/4ba42fb8-683f-4c57-9c9f-9892f75a93cb" />
+<img width="1243" height="696" alt="image" src="https://github.com/user-attachments/assets/bfcec0c9-8db5-4f88-b4a7-ce8037380cf6" />
 
 ### 6. Customer Care Solutions
 An actionable, three-tab section supporting CRM activities with a persistent left-hand KPI panel.
@@ -130,7 +130,7 @@ An actionable, three-tab section supporting CRM activities with a persistent lef
   * **Key Features:** Box-and-whisker plot for Activation Priority Score and workload distribution by department.
   * **💡 Snapshot Insight:** The activation workload is heavily unbalanced, with the **Retail Department** bearing the brunt of the backlog (666 accounts requiring immediate activation), indicating a need for prioritized resource allocation.
  
-<img width="1443" height="811" alt="image" src="https://github.com/user-attachments/assets/143c435a-a030-4f9f-bc27-5b1671e506a4" />
+<img width="1242" height="699" alt="image" src="https://github.com/user-attachments/assets/6e68fa8a-4128-4797-82fb-31ff6b5a8cdd" />
 
 ---
 ## 🔗 Live Dashboard
