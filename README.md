@@ -68,8 +68,8 @@ customer_segmentation/
 │   └── translate_term_type.sql           # Reusable macro for term type labels
 ├── seeds/
 │   └── product_mapping.csv               # Product mapping reference (115 products)
-└── analysis/
-│   └── risk_score_eda.ipynb              # EDA and find the cutoff based on actual debt group
+└── analyses/
+│   └── risk_score_eda.ipynb              # EDA and find the cutoff using Youden's J method
 ├──snapshots
 ├──tests
 ```
